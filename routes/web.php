@@ -12,3 +12,5 @@ Route::get('/semester', 'SemesterController@Semester');
 Route::get('/semester/create', 'SemesterController@SemesterCreate');
 Route::post('/semester/store', 'SemesterController@SemesterStore');
 Route::get('/semester/delete', 'SemesterController@SemesterDelete');
+
+//test
