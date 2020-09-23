@@ -1,0 +1,136 @@
+/*
+COMP5703 MySQL Database Schema
+
+Source Server         : mysql
+Source Server Version : 80012
+Source Host           : localhost:3306
+Source Database       : yuteng
+
+Target Server Type    : MYSQL
+Target Server Version : 80012
+File Encoding         : 65001
+
+Date: 2020-09-05 13:51:36
+*/
+
+DROP DATABASE COMP5703;
+CREATE DATABASE COMP5703;
+USE COMP5703;
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `user_id` char(8) NOT NULL COMMENT 'the user id',
+  `user_password` varchar(15) NOT NULL DEFAULT '000000' COMMENT 'the user password',
+  `user_first_name` varchar(30) NOT NULL COMMENT 'the user first name',
+  `user_last_name` varchar(30) NOT NULL COMMENT 'the user last name',
+  `user_gender` char(6) NOT NULL DEFAULT 'male' COMMENT 'gender of the user',
+  `user_role` int(10) unsigned NOT NULL COMMENT 'the role of the user',
+  `user_birthday` date NOT NULL COMMENT 'birthday of the user',
+  `user_email` varchar(50) NOT NULL COMMENT 'email of the user',
+  `user_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the user account(0：unavailable，1：available)',
+  `user_create_user` char(8) NOT NULL COMMENT 'the user who create this user',
+  `user_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this user is created',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `semester`
+-- ----------------------------
+DROP TABLE IF EXISTS `semester`;
+CREATE TABLE `semester` (
+  `semester_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated id for semester',
+  `semester_name` varchar(15) NOT NULL UNIQUE COMMENT 'name of the semester',
+  `semester_start` date NOT NULL COMMENT 'the start date of the semester',
+  `semester_end` date NOT NULL COMMENT 'the end date of the semester',
+  `semester_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the semester(0：unavailable，1：available)',
+  `semester_create_user` char(8) NOT NULL COMMENT 'the user who create this semester',
+  `semester_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this semester is created',
+  PRIMARY KEY (`semester_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `uos`
+-- ----------------------------
+DROP TABLE IF EXISTS `uos`;
+CREATE TABLE `uos` (
+  `uos_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated id for the unit of study',
+  `uos_name` varchar(255) NOT NULL COMMENT 'name of the unit of study',
+  `uos_code` varchar(10) NOT NULL COMMENT 'code of the unit of study',
+  `uos_semester` int(10) unsigned NOT NULL COMMENT 'the semester id for the unit of study',
+  `uos_description` varchar(255) NOT NULL COMMENT 'the description for the unit of study',
+  `uos_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the semester(0：unavailable，1：available)',
+  `uos_create_user` char(8) NOT NULL COMMENT 'the user who create this unit of study',
+  `uos_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this unit of study is created',
+  PRIMARY KEY (`uos_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `uos_coordinator`
+-- ----------------------------
+DROP TABLE IF EXISTS `uos_coordinator`;
+CREATE TABLE `uos_coordinator` (
+  `uos_coordinator_uos` int(10) unsigned NOT NULL COMMENT 'the id of the unit of study',
+  `uos_coordinator_user` char(8) NOT NULL COMMENT 'the id of the coordinator',
+  `uos_coordinator_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship between uos and coordinator',
+  `uos_coordinator_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship between uos and coordinator is created',
+  PRIMARY KEY (`uos_coordinator_uos`, `uos_coordinator_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `uos_causal_academic`
+-- ----------------------------
+DROP TABLE IF EXISTS `uos_causal_academic`;
+CREATE TABLE `uos_causal_academic` (
+  `uos_causal_academic_uos` int(10) unsigned NOT NULL COMMENT 'the id of the unit of study',
+  `uos_causal_academic_user` char(8) NOT NULL COMMENT 'the id of the causal academic',
+  `uos_causal_academic_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship between uos and causal academic',
+  `uos_causal_academic_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship between uos and causal academic is created',
+  PRIMARY KEY (`uos_causal_academic_uos`, `uos_causal_academic_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `allocated_hour`
+-- ----------------------------
+DROP TABLE IF EXISTS `allocated_hour`;
+CREATE TABLE `allocated_hour` (
+  `allocated_hour_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated id for the allocated hour',
+  `allocated_hour_uos` int(10) unsigned NOT NULL COMMENT 'the id of the unit of study for this allocated hour',
+  `allocated_hour_causal_academic` char(8) NOT NULL COMMENT 'the id of the causal academic',
+  `allocated_hour_day` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'the day of allocated hour(0：Sunday，1：Monday, ..., 6:Saturday)',
+  `allocated_hour_start_time` time NOT NULL COMMENT 'the start time of the allocated hour',
+  `allocated_hour_end_time` time NOT NULL COMMENT 'the end time of the allocated hour',
+  `allocated_hour_approve_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'the approve status of this allocated hour(0：pending，1：approved, 2:rejected)',
+  `allocated_hour_approve_user` char(8) COMMENT 'the user who approve/rejecte this allocated hour',
+  `allocated_hour_approve_time` timestamp COMMENT 'the time when this allocated hour is approved/rejected',
+  `allocated_hour_create_user` char(8) NOT NULL COMMENT 'the user who create this allocated hour',
+  `allocated_hour_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this allocated hour is created',
+  PRIMARY KEY (`allocated_hour_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `timesheet`
+-- ----------------------------
+DROP TABLE IF EXISTS `timesheet`;
+CREATE TABLE `timesheet` (
+  `timesheet_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated id for the timesheet',
+  `timesheet_uos` int(10) unsigned NOT NULL COMMENT 'the id of the unit of study for this timesheet',
+  `timesheet_causal_academic` char(8) NOT NULL COMMENT 'the id of the causal academic',
+  `timesheet_date` date NOT NULL COMMENT 'the date of the timesheet',
+  `timesheet_start_time` time NOT NULL COMMENT 'the start time of the timesheet',
+  `timesheet_end_time` time NOT NULL COMMENT 'the end time of the timesheet',
+  `timesheet_approve_is_marking` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'the type of this timesheet(0：non-marking，1：marking)',
+  `timesheet_approve_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'the approve status of this timesheet(0：pending，1：approved, 2:rejected)',
+  `timesheet_approve_user` char(8) COMMENT 'the user who approve/rejecte this timesheet',
+  `timesheet_approve_time` timestamp COMMENT 'the time when this timesheet is approved/rejected',
+  `timesheet_create_user` char(8) NOT NULL COMMENT 'the user who create this timesheet',
+  `timesheet_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this timesheet is created',
+  PRIMARY KEY (`timesheet_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `user` VALUES ('zzha4377', '000000', 'Ziyi', 'Zhang', 'male', '1', '2020-09-09', 'zzha4377@uni.sydney.edu.au', '1', 'zzha4377', '2020-09-10 02:14:43');
+
