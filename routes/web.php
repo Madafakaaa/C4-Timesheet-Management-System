@@ -13,4 +13,8 @@ Route::get('/semester/create', 'SemesterController@SemesterCreate');
 Route::post('/semester/store', 'SemesterController@SemesterStore');
 Route::get('/semester/delete', 'SemesterController@SemesterDelete');
 
+// CA
+Route::get('/casualAcademic', 'CasualAcademicController@CasualAcademic');
+Route::get('/casualAcademic/create', 'CasualAcademicController@CasualAcademicCreate');
+
 //test

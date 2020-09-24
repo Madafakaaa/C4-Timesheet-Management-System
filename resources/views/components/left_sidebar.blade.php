@@ -6,6 +6,7 @@
       <li class="g_heading">Administration</li>
       <li id="dashboard"><a href="/home"><i class="icon-home"></i><span>Home</span></a></li>
       <li id="semester"><a href="/semester"><i class="fa fa-calendar"></i><span>Semester</span></a></li>
+      <li id="casualAcademic"><a href="/casualAcademic"><i class="fe fe-user"></i><span>CasualAcademic</span></a></li>
       <!--
       <li>
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-lock"></i><span>Layer1</span></a>
