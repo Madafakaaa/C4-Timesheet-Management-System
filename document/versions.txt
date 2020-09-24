@@ -1,0 +1,4 @@
+V0.1 2020-09-12
+1. Notification feature (Booststrap-notify.js)
+2. Log in / Log out
+3. Create/delete semester

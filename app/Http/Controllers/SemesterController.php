@@ -23,7 +23,6 @@ class SemesterController extends Controller
                           ->where('semester_is_available', 1)
                           ->orderBy('semester_id', 'asc')
                           ->get();
-        return $db_semesters;
         // 返回列表视图
         return view('/semester', ['db_semesters' => $db_semesters]);
     }
