@@ -17,4 +17,7 @@ Route::get('/semester/delete', 'SemesterController@SemesterDelete');
 Route::get('/casualAcademic', 'CasualAcademicController@CasualAcademic');
 Route::get('/casualAcademic/create', 'CasualAcademicController@CasualAcademicCreate');
 
+// UC
+Route::get('/coordinator ', 'CoordinatorController@Coordinator');
+Route::get('/coordinator/create ', 'CoordinatorController@CoordinatorCreate');
 //test
