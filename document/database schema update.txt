@@ -38,9 +38,9 @@ CREATE TABLE `semester` (
   `semester_end` date NOT NULL COMMENT 'the end date of the semester',
   `semester_duration` int(10) NOT NULL COMMENT 'the duration of the semester (weeks)',
   `semester_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the semester(0：unavailable，1：available)',
-  `semester_create_user` int(10) NOT NULL COMMENT 'the user who create this semester',
+  `semester_create_user` char(8) NOT NULL COMMENT 'the user who create this semester',
   `semester_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this semester is created',
-  `semester_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this semester',
+  `semester_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this semester',
   `semester_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this semester is last_edit',
   PRIMARY KEY (`semester_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -56,9 +56,9 @@ CREATE TABLE `uos` (
   `uos_semester` int(10) unsigned NOT NULL COMMENT 'the semester id for the unit of study',
   `uos_description` varchar(255) NOT NULL COMMENT 'the description for the unit of study',
   `uos_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the semester(0：unavailable，1：available)',
-  `uos_create_user` int(10) NOT NULL COMMENT 'the user who create this unit of study',
+  `uos_create_user` char(8) NOT NULL COMMENT 'the user who create this unit of study',
   `uos_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this unit of study is created',
-  `uos_last_edit_user` int(10) NOT NULL COMMENT 'the uos who last_edit this user',
+  `uos_last_edit_user` char(8) NOT NULL COMMENT 'the uos who last_edit this user',
   `uos_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this uos is last_edit',
   PRIMARY KEY (`uos_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -69,11 +69,11 @@ CREATE TABLE `uos` (
 
 DROP TABLE IF EXISTS `uos_coordinator`;
 CREATE TABLE `uos_coordinator` (
-  `uos_coordinator_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `uos_coordinator_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   `uos_coordinator_uos` int(10) unsigned NOT NULL COMMENT 'id for the unit of study',
-  `uos_coordinator_create_user` int(10) NOT NULL COMMENT 'the user who create this relationship',
+  `uos_coordinator_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship',
   `uos_coordinator_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship is created',
-  `uos_coordinator_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this relationship',
+  `uos_coordinator_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this relationship',
   `uos_coordinator_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship is last_edit',
   PRIMARY KEY (`uos_coordinator_user`, `uos_coordinator_uos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -84,12 +84,12 @@ CREATE TABLE `uos_coordinator` (
 
 DROP TABLE IF EXISTS `uos_casual_academic`;
 CREATE TABLE `uos_casual_academic` (
-  `uos_casual_academic_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `uos_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   `uos_casual_academic_uos` int(10) unsigned NOT NULL COMMENT 'id for the unit of study',
   `uos_casual_academic_type` int(10) unsigned NOT NULL COMMENT 'the type of AC',
-  `uos_casual_academic_create_user` int(10) NOT NULL COMMENT 'the user who create this relationship',
+  `uos_casual_academic_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship',
   `uos_casual_academic_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship is created',
-  `uos_casual_academic_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this relationship',
+  `uos_casual_academic_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this relationship',
   `uos_casual_academic_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship is last_edit',
   PRIMARY KEY (`uos_casual_academic_user`, `uos_casual_academic_uos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -103,12 +103,12 @@ CREATE TABLE `week` (
   `week_id` int(10) unsigned NOT NULL COMMENT 'id for the week',
   `week_semester` int(10) unsigned NOT NULL COMMENT 'id for the semester',
   `week_name` varchar(15) NOT NULL COMMENT 'name for the week',
-  `week_is_study` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT 'whether this week is work',
+  `week_is_study` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT 'whether this week is the study week or not(1:study week, 0: break week)',
   `week_start_date` date NOT NULL COMMENT 'the date of the start of this semester',
   `week_end_date` date NOT NULL COMMENT 'the date of the end of this semester',
-  `week_create_user` int(10) NOT NULL COMMENT 'the user who create this week plan',
+  `week_create_user` char(8) NOT NULL COMMENT 'the user who create this week plan',
   `week_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is created',
-  `week_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this week plan',
+  `week_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this week plan',
   `week_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is last_edit',
   PRIMARY KEY (`week_semester`, `week_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -127,9 +127,9 @@ CREATE TABLE `tutorial` (
   `tutorial_start_time` time NOT NULL COMMENT 'the time of the start of this tutorial',
   `tutorial_end_time` time NOT NULL COMMENT 'the time of the end of this tutorial',
   `tutorial_location` varchar(255) NOT NULL COMMENT 'the location information of this tutorial',
-  `tutorial_create_user` int(10) NOT NULL COMMENT 'the user when this week plan is created',
+  `tutorial_create_user` char(8) NOT NULL COMMENT 'the user when this week plan is created',
   `tutorial_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is created',
-  `tutorial_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this week plan',
+  `tutorial_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this week plan',
   `tutorial_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is last_edit',
   PRIMARY KEY (`tutorial_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -141,7 +141,7 @@ CREATE TABLE `tutorial` (
 DROP TABLE IF EXISTS `tutorial_casual_academic`;
 CREATE TABLE `tutorial_casual_academic` (
   `tutorial_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `tutorial_casual_academic_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `tutorial_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   PRIMARY KEY (`tutorial_casual_academic_tutorial`, `tutorial_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -152,7 +152,7 @@ CREATE TABLE `tutorial_casual_academic` (
 DROP TABLE IF EXISTS `preference_casual_academic`;
 CREATE TABLE `preference_casual_academic` (
   `preference_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `preference_casual_academic_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `preference_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   `preference_casual_academic_rank` tinyint(4) unsigned NOT NULL COMMENT 'the rank of the preference',
   PRIMARY KEY (`preference_casual_academic_tutorial`, `preference_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -164,7 +164,7 @@ CREATE TABLE `preference_casual_academic` (
 DROP TABLE IF EXISTS `preference_casual_academic`;
 CREATE TABLE `preference_casual_academic` (
   `preference_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `preference_casual_academic_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `preference_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   `preference_casual_academic_rank` tinyint(4) unsigned NOT NULL COMMENT 'the rank of the preference',
   PRIMARY KEY (`preference_casual_academic_tutorial`, `preference_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -175,14 +175,14 @@ CREATE TABLE `preference_casual_academic` (
 
 DROP TABLE IF EXISTS `marking_schedule`;
 CREATE TABLE `marking_schedule` (
-  `marking_schedule_user` int(10) unsigned NOT NULL COMMENT 'id for the user',
+  `marking_schedule_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
   `marking_schedule_uos` int(10) unsigned NOT NULL COMMENT 'id for the uos',
   `marking_schedule_week` int(10) unsigned NOT NULL COMMENT 'id for the user',
   `marking_schedule_duration` int(10) unsigned NOT NULL COMMENT 'duration of the schedule',
-  `marking_schedule_due_date` varchar(255) NOT NULL COMMENT 'the due date of this tutorial work',
-  `marking_schedule_create_user` int(10) NOT NULL COMMENT 'the user when this week plan is created',
+  `marking_schedule_due_date` date NOT NULL COMMENT 'the due date of this tutorial work',
+  `marking_schedule_create_user` char(8) NOT NULL COMMENT 'the user when this week plan is created',
   `marking_schedule_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is created',
-  `marking_schedule_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this week plan',
+  `marking_schedule_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this week plan',
   `marking_schedule_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is last_edit',
   PRIMARY KEY (`marking_schedule_user`, `marking_schedule_uos`, `marking_schedule_week`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
