@@ -19,17 +19,16 @@ class CasualAcademicController extends Controller
             return loginExpired();  // Have not logged in, redirect to the login page.
         }
         // 获取数据
-        $db_casualAcademics = DB::select('SELECT * from user where user_role % 2 = 1 and user_is_available = 1;');
+//        $db_semesters = DB::table('semester')
+//            ->where('semester_is_available', 1)
+//            ->orderBy('semester_id', 'asc')
+//            ->get();
+        $db_casualAcademics = DB::table('user')
+            ->where('user_is_casual_academic', 1)
+            ->where('user_is_available', 1)
+            ->get();
         // 返回列表视图
         return view('/casualAcademic', ['db_casualAcademics' => $db_casualAcademics]);
-    }
-
-    public function semesterCreate(){
-        // Check login status
-        if(!Session::has('login')){
-            return loginExpired();  // Have not logged in, redirect to the login page.
-        }
-        return view('/semesterCreate');
     }
 
 }

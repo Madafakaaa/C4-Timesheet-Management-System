@@ -8,7 +8,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `user_id` int(10) NOT NULL COMMENT 'the user id',
+  `user_id` char(8) NOT NULL COMMENT 'the user id',
   `user_password` varchar(15) NOT NULL DEFAULT '000000' COMMENT 'the user password',
   `user_first_name` varchar(30) NOT NULL COMMENT 'the user first name',
   `user_last_name` varchar(30) NOT NULL COMMENT 'the user last name',
@@ -20,9 +20,9 @@ CREATE TABLE `user` (
   `user_is_casual_academic` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'whether is casual_academic(0: no, 1: yeas)',
   `user_is_uos_coordinator` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'whether is uos_coordinator(0: no, 1: yeas)',
   `user_is_available` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'the available status of the user account(0：unavailable，1：available)',
-  `user_create_user` int(10) NOT NULL COMMENT 'the user who create this user',
+  `user_create_user` char(8) NOT NULL COMMENT 'the user who create this user',
   `user_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this user is created',
-  `user_last_edit_user` int(10) NOT NULL COMMENT 'the user who last_edit this user',
+  `user_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this user',
   `user_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this user is last_edit',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

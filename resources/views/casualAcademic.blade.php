@@ -23,7 +23,6 @@
                     <th scope="col">#</th>
                     <th scope="col">CasualAcademic Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Gender</th>
                     <th scope="col">Birthday</th>
                   </tr>
                 </thead>
@@ -33,7 +32,6 @@
                       <th>{{$loop->iteration}}</th>
                       <td>{{$db_casualAcademic->user_first_name}} {{$db_casualAcademic->user_last_name}}</td>
                       <td>{{$db_casualAcademic->user_email}}</td>
-                      <td>{{$db_casualAcademic->user_gender}}</td>
                       <td>{{$db_casualAcademic->user_birthday}}</td>
                     </tr>
                   @empty
