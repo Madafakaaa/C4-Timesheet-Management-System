@@ -69,7 +69,7 @@ CREATE TABLE `uos` (
 
 DROP TABLE IF EXISTS `uos_coordinator`;
 CREATE TABLE `uos_coordinator` (
-  `uos_coordinator_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `uos_coordinator_user` char(8) NOT NULL COMMENT 'id for the user',
   `uos_coordinator_uos` int(10) unsigned NOT NULL COMMENT 'id for the unit of study',
   `uos_coordinator_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship',
   `uos_coordinator_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this relationship is created',
@@ -84,7 +84,7 @@ CREATE TABLE `uos_coordinator` (
 
 DROP TABLE IF EXISTS `uos_casual_academic`;
 CREATE TABLE `uos_casual_academic` (
-  `uos_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `uos_casual_academic_user` char(8) NOT NULL COMMENT 'id for the user',
   `uos_casual_academic_uos` int(10) unsigned NOT NULL COMMENT 'id for the unit of study',
   `uos_casual_academic_type` int(10) unsigned NOT NULL COMMENT 'the type of AC',
   `uos_casual_academic_create_user` char(8) NOT NULL COMMENT 'the user who create this relationship',
@@ -141,7 +141,7 @@ CREATE TABLE `tutorial` (
 DROP TABLE IF EXISTS `tutorial_casual_academic`;
 CREATE TABLE `tutorial_casual_academic` (
   `tutorial_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `tutorial_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `tutorial_casual_academic_user` char(8) NOT NULL COMMENT 'id for the user',
   PRIMARY KEY (`tutorial_casual_academic_tutorial`, `tutorial_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -152,7 +152,7 @@ CREATE TABLE `tutorial_casual_academic` (
 DROP TABLE IF EXISTS `preference_casual_academic`;
 CREATE TABLE `preference_casual_academic` (
   `preference_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `preference_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `preference_casual_academic_user` char(8) NOT NULL COMMENT 'id for the user',
   `preference_casual_academic_rank` tinyint(4) unsigned NOT NULL COMMENT 'the rank of the preference',
   PRIMARY KEY (`preference_casual_academic_tutorial`, `preference_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -164,7 +164,7 @@ CREATE TABLE `preference_casual_academic` (
 DROP TABLE IF EXISTS `preference_casual_academic`;
 CREATE TABLE `preference_casual_academic` (
   `preference_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `preference_casual_academic_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `preference_casual_academic_user` char(8) NOT NULL COMMENT 'id for the user',
   `preference_casual_academic_rank` tinyint(4) unsigned NOT NULL COMMENT 'the rank of the preference',
   PRIMARY KEY (`preference_casual_academic_tutorial`, `preference_casual_academic_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -175,7 +175,7 @@ CREATE TABLE `preference_casual_academic` (
 
 DROP TABLE IF EXISTS `marking_schedule`;
 CREATE TABLE `marking_schedule` (
-  `marking_schedule_user` char(8) unsigned NOT NULL COMMENT 'id for the user',
+  `marking_schedule_user` char(8) NOT NULL COMMENT 'id for the user',
   `marking_schedule_uos` int(10) unsigned NOT NULL COMMENT 'id for the uos',
   `marking_schedule_week` int(10) unsigned NOT NULL COMMENT 'id for the user',
   `marking_schedule_duration` int(10) unsigned NOT NULL COMMENT 'duration of the schedule',
