@@ -17,4 +17,19 @@ Route::get('/semester/delete', 'SemesterController@SemesterDelete');
 Route::get('/casualAcademic', 'CasualAcademicController@CasualAcademic');
 Route::get('/casualAcademic/create', 'CasualAcademicController@CasualAcademicCreate');
 Route::post('/casualAcademic/store', 'CasualAcademicController@CasualAcademicStore');
+
+// UC
+Route::get('/coordinator ', 'CoordinatorController@Coordinator');
+Route::get('/coordinator/create ', 'CoordinatorController@CoordinatorCreate');
+
+//Uos
+Route::get('/uos ', 'UosController@Uos');
+Route::get('/uos/create ', 'UosController@UosCreate');
+
+//Tutorial
+Route::get('/tutorial ', 'TutorialController@Tutorial');
+Route::get('/tutorial/assign ', 'TutorialController@TutorialAssign');
+Route::get('/tutorial/create ', 'tutorialController@TutorialCreate');
+
+
 //test

@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('top_nav_page_name')
-  <h1 class="page-title">coordinator</h1>
+  <h1 class="page-title">tutorial</h1>
 @endsection
 
 @section('body')
@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-2 mb-2">
-                <a href="/coordinator/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
+                <a href="/uos" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Return Uos</a>
               </div>
               <div class="col-lg-4 offset-lg-6">
                 <input type="text" class="form-control search" placeholder="Search...">
@@ -24,22 +24,23 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">coordinator Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Birthday</th>
+                    <th scope="col">Uos Name</th>
+                    <th scope="col">Tutorial Name</th>
+                    <th scope="col">Day In Week</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Control</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($db_coordinator as $db_coordinator)
+                  @forelse($db_tutorial as $db_tutorial)
                     <tr>
                       <th>{{$loop->iteration}}</th>
-                      <td>{{$db_coordinator->user_first_name}} {{$db_coordinator->user_last_name}}</td>
-                      <td>{{$db_coordinator->user_email}}</td>
-                      <td>{{$db_coordinator->user_title}}</td>
-                      <td>{{$db_coordinator->user_birthday}}</td>
-                      <td class="py-2"><a href="" class="btn btn-sm btn-outline-success">View Uos</a></td>
-                      <td class="py-2"><a href="" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                      <td>{{$db_tutorial->tutorial_uos}}</td>
+                      <td>{{$db_tutorial->tutorial_name}}</td>
+                      <td>{{$db_tutorial->tutorial_day_in_week}}</td>
+                      <td>{{$db_tutorial->tutorial_duration}}</td>
+                      <td class="py-2"><a href="/tutorial/assign}" class="btn btn-sm btn-outline-success">Assign</a></td>
+
                     </tr>
                   @empty
                     <tr>

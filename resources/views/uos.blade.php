@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('top_nav_page_name')
-  <h1 class="page-title">coordinator</h1>
+  <h1 class="page-title">uos</h1>
 @endsection
 
 @section('body')
@@ -12,9 +12,6 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-2 mb-2">
-                <a href="/coordinator/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
-              </div>
               <div class="col-lg-4 offset-lg-6">
                 <input type="text" class="form-control search" placeholder="Search...">
               </div>
@@ -24,22 +21,22 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">coordinator Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Birthday</th>
+                    <th scope="col">Uos Name</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Uos Code</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">View Tutorial</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @forelse($db_coordinator as $db_coordinator)
+                  @forelse($db_uos as $db_uos)
                     <tr>
                       <th>{{$loop->iteration}}</th>
-                      <td>{{$db_coordinator->user_first_name}} {{$db_coordinator->user_last_name}}</td>
-                      <td>{{$db_coordinator->user_email}}</td>
-                      <td>{{$db_coordinator->user_title}}</td>
-                      <td>{{$db_coordinator->user_birthday}}</td>
-                      <td class="py-2"><a href="" class="btn btn-sm btn-outline-success">View Uos</a></td>
-                      <td class="py-2"><a href="" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                      <td>{{$db_uos->uos_name}}</td>
+                      <td>{{$db_uos->uos_semester}}</td>
+                      <td>{{$db_uos->uos_code}}</td>
+                      <td>{{$db_uos->uos_description}}</td>
+                      <td class="py-2"><a href="/tutorial?tutorial_uos={{$db_uos->uos_id}}" class="btn btn-sm btn-outline-success">View Tutorial</a></td>
                     </tr>
                   @empty
                     <tr>
