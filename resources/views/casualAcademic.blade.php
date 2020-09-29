@@ -12,6 +12,9 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
+              <div class="col-lg-2 mb-2">
+                <a href="/casualAcademic/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
+              </div>
               <div class="col-lg-4 offset-lg-6">
                 <input type="text" class="form-control search" placeholder="Search...">
               </div>

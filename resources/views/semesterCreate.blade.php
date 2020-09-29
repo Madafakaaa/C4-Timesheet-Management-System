@@ -28,6 +28,7 @@
             <div class="card-footer">
               <input type="submit" class="form-control btn btn-pill btn-primary" value="Submit" id="submitButton1">
             </div>
+          </form>
           </div>
         </div>
       </div>
