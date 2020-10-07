@@ -16,39 +16,11 @@
                 <label class="form-label">CasualAcademic UserId</label>
                 <input type="text" class="form-control" placeholder="User Name..." name="user_id" required maxlength="25" autocomplete="off">
               </div>
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="text" class="form-control" placeholder="Password..." name="user_password" required maxlength="25" autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-control" placeholder="First Name..." name="user_first_name" required maxlength="50" autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name..." name="user_last_name" required maxlength="50" autocomplete="off">
-              </div>
-              <div class="form-group">
-                  <label class="form-label">Select Title</label>
-                  <select name="user_title" class="form-control">
-                      <option value="Mr">Mr</option>
-                      <option value="Ms">Ms</option>
-                      <option value="Ms">Mrs</option>
-                      <option value="Ms">Miss</option>
-                  </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Birthday</label>
-                <input type="text" data-provide="datepicker" data-date-autoclose="true" class="form-control" data-date-format="yyyy-mm-dd" value="{{date('Y-m-d')}}" name="user_birthday" required autocomplete="off">
-              </div>
-              <div class="form-group">
-                <label class="form-label">E-Mail</label>
-                <input type="text" class="form-control" placeholder="E-Mail..." name="user_email" required maxlength="255" autocomplete="off">
-              </div>
+                <div class="card-footer">
+                    <input type="submit" class="form-control btn btn-pill btn-primary" value="Submit" id="submitButton2">
+                </div>
             </div>
-            <div class="card-footer">
-              <input type="submit" class="form-control btn btn-pill btn-primary" value="Submit" id="submitButton2">
-            </div>
+
           </form>
           </div>
         </div>

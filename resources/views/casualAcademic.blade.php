@@ -36,6 +36,7 @@
                       <td>{{$db_casualAcademic->user_first_name}} {{$db_casualAcademic->user_last_name}}</td>
                       <td>{{$db_casualAcademic->user_email}}</td>
                       <td>{{$db_casualAcademic->user_birthday}}</td>
+                      <td class="py-2"><a href="/casualAcademic/delete?user_id={{$db_casualAcademic->user_id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
                     </tr>
                   @empty
                     <tr>

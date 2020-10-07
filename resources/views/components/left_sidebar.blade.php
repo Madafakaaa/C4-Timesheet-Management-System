@@ -9,6 +9,7 @@
       <li id="casualAcademic"><a href="/casualAcademic"><i class="fe fe-user"></i><span>CasualAcademic</span></a></li>
       <li id="uos"><a href="/uos"><i class="fe fe-book"></i><span>Uos</span></a></li>
       <li id="coordinator"><a href="/coordinator"><i class="fe fe-users"></i><span>Coordinator</span></a></li>
+      <li id="coordinator"><a href="/adminUser"><i class="fe fe-users"></i><span>User</span></a></li>
       <!--
       <li>
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-lock"></i><span>Layer1</span></a>

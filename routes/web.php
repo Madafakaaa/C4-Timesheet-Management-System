@@ -17,6 +17,7 @@ Route::get('/semester/delete', 'SemesterController@SemesterDelete');
 Route::get('/casualAcademic', 'CasualAcademicController@CasualAcademic');
 Route::get('/casualAcademic/create', 'CasualAcademicController@CasualAcademicCreate');
 Route::post('/casualAcademic/store', 'CasualAcademicController@CasualAcademicStore');
+Route::get('/casualAcademic/delete', 'CasualAcademicController@CasualAcademicDelete');
 
 // UC
 Route::get('/coordinator ', 'CoordinatorController@Coordinator');
@@ -30,6 +31,14 @@ Route::get('/uos/create ', 'UosController@UosCreate');
 Route::get('/tutorial ', 'TutorialController@Tutorial');
 Route::get('/tutorial/assign ', 'TutorialController@TutorialAssign');
 Route::get('/tutorial/create ', 'tutorialController@TutorialCreate');
+
+//Admin-User
+Route::get('/adminUser', 'AdminUserController@AdminUser');
+Route::get('/adminUser/create', 'AdminUserController@AdminUserCreate');
+Route::post('/adminUser/store', 'AdminUserController@AdminUserStore');
+Route::get('/adminUser/delete', 'AdminUserController@AdminUserDelete');
+Route::get('/adminUser/edit', 'AdminUserController@AdminUserEdit');
+
 
 
 //test
