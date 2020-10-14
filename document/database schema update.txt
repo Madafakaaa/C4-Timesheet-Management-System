@@ -100,7 +100,7 @@ CREATE TABLE `uos_casual_academic` (
 
 DROP TABLE IF EXISTS `week`;
 CREATE TABLE `week` (
-  `week_id` int(10) unsigned NOT NULL COMMENT 'id for the week',
+  `week_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id for the week',
   `week_semester` int(10) unsigned NOT NULL COMMENT 'id for the semester',
   `week_name` varchar(15) NOT NULL COMMENT 'name for the week',
   `week_is_study` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT 'whether this week is the study week or not(1:study week, 0: break week)',
@@ -110,7 +110,7 @@ CREATE TABLE `week` (
   `week_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is created',
   `week_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this week plan',
   `week_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is last_edit',
-  PRIMARY KEY (`week_semester`, `week_name`)
+  PRIMARY KEY (`week_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -119,7 +119,7 @@ CREATE TABLE `week` (
 
 DROP TABLE IF EXISTS `tutorial`;
 CREATE TABLE `tutorial` (
-  `tutorial_id` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
+  `tutorial_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id for the tutorial',
   `tutorial_uos` int(10) unsigned NOT NULL COMMENT 'id for the uos',
   `tutorial_name` varchar(15)  NOT NULL COMMENT 'name for the tutorial',
   `tutorial_day_in_week` varchar(15) NOT NULL COMMENT 'which day in the week',

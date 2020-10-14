@@ -17,26 +17,20 @@
             <div class="d-md-flex">
               <div class="card mr-1">
                 <div class="card-body">
-                  <div class="text">Pageviews</div>
+                  <div class="text">User</div>
                   <h5 class="counter">479</h5>
                 </div>
               </div>
               <div class="card mr-1">
                 <div class="card-body">
-                  <div class="text">Unique View</div>
-                  <h5 class="counter">427</h5>
+                  <div class="text">Courses</div>
+                  <h5 class="counter">82</h5>
                 </div>
               </div>
               <div class="card mr-1">
                 <div class="card-body">
-                  <div class="text">Entrances</div>
-                  <h5 class="counter">82</h5>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <div class="text">Bounce Rate</div>
-                  <h5><span class="counter">37.74</span>%</h5>
+                  <div class="text">Tutorials</div>
+                  <h5 class="counter">253</h5>
                 </div>
               </div>
             </div>

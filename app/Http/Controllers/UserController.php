@@ -9,139 +9,246 @@ use Exception;
 
 class UserController extends Controller
 {
-
     /**
-     * 显示单个班级详细信息
-     * URL: GET /class/{id}
-     * @param  int  $user_id
+     * Read user info
+     * URL: GET /user
      */
     public function user(Request $request){
-        // 检查登录状态
+         // Check login status
         if(!Session::has('login')){
-            return loginExpired(); // 未登录，返回登陆视图
+            return loginExpired();  // Have not logged in, redirect to the login page.
         }
-        // 检测用户权限
-        if(!in_array("/user", Session::get('user_accesses'))){
-           return back()->with(['notify' => true,'type' => 'danger','title' => '您的账户没有访问权限']);
-        }
-        // 获取用户id
-        $user_id = decode($request->input('id'), 'user_id');
-        // 获取数据信息
-        $user = DB::table('user')
-                   ->join('department', 'user.user_department', '=', 'department.department_id')
-                   ->join('teacher_type', 'user.user_teacher_type', '=', 'teacher_type.teacher_type_id')
-                   ->join('position', 'user.user_position', '=', 'position.position_id')
-                   ->where('user_id', $user_id)
-                   ->first();
-
-        // 获取上课记录
-        $db_lessons = DB::table('lesson')
-                        ->join('class', 'lesson.lesson_class', '=', 'class.class_id')
-                        ->join('grade', 'class.class_grade', '=', 'grade.grade_id')
-                        ->join('subject', 'class.class_subject', '=', 'subject.subject_id')
-                        ->where('lesson_teacher', $user_id)
-                        ->orderBy('lesson_date', 'desc')
-                        ->orderBy('lesson_start', 'desc')
-                        ->limit(200)
-                        ->get();
-        $lessons = array();
-        foreach($db_lessons as $db_lesson){
-            $temp=array();
-            $temp['lesson_id']=$db_lesson->lesson_id;
-            $temp['class_id']=$db_lesson->class_id;
-            $temp['class_name']=$db_lesson->class_name;
-            $temp['grade_name']=$db_lesson->grade_name;
-            $temp['subject_name']=$db_lesson->subject_name;
-            $temp['lesson_date']=$db_lesson->lesson_date;
-            $temp['lesson_start']=$db_lesson->lesson_start;
-            $temp['lesson_teacher_fee']=$db_lesson->lesson_teacher_fee;
-            $temp['lesson_hour_price']=$db_lesson->lesson_hour_price;
-            $temp['lesson_attended_num']=$db_lesson->lesson_attended_num;
-            $temp['lesson_leave_num']=$db_lesson->lesson_leave_num;
-            $temp['lesson_absence_num']=$db_lesson->lesson_absence_num;
-            $temp['lesson_document']=$db_lesson->lesson_document;
-            // 获取创建者信息
-            $temp_create_user = DB::table('user')
-                                  ->where('user_id', $db_lesson->lesson_create_user)
-                                  ->first();
-            $temp['create_user_id']=$temp_create_user->user_id;
-            $temp['create_user_name']=$temp_create_user->user_name;
-            // 获取上课成员
-            $temp['participants'] = array();
-            $participants = DB::table('participant')
-                             ->join('student', 'student.student_id', '=', 'participant.participant_student')
-                             ->join('grade', 'grade.grade_id', '=', 'student.student_grade')
-                             ->leftJoin('course', 'course.course_id', '=', 'participant.participant_course')
-                             ->where('participant_lesson', $db_lesson->lesson_id)
-                             ->get();
-            foreach($participants as $participant){
-                $participant_temp = array();
-                $participant_temp['student_id'] = $participant->student_id;
-                $participant_temp['student_name'] = $participant->student_name;
-                $participant_temp['grade_name'] = $participant->grade_name;
-                $participant_temp['course_name'] = $participant->course_name;
-                $participant_temp['participant_amount'] = $participant->participant_amount;
-                $participant_temp['participant_attend_status'] = $participant->participant_attend_status;
-                $temp['participants'][] = $participant_temp;
-            }
-            $lessons[]=$temp;
-        }
-
-        // 获取负责班级
-        $classes = DB::table('class')
-                      ->join('grade', 'class.class_grade', '=', 'grade.grade_id')
-                      ->join('subject', 'class.class_subject', '=', 'subject.subject_id')
-                      ->where('class_teacher', $user_id)
-                      ->where('class_is_available', 1)
-                      ->orderBy('class_grade', 'asc')
-                      ->orderBy('class_max_num', 'asc')
-                      ->orderBy('class_current_num', 'asc')
-                      ->get();
-
-        return view('user/user', ['user' => $user,
-                                  'classes' => $classes,
-                                  'lessons' => $lessons]);
+        // 获取数据
+        $db_users = DB::table('user')
+            ->where('user_is_available', 1)
+            ->get();
+        // 返回列表视图
+        return view('/user', ['db_users' => $db_users]);
     }
 
-    /**
-     * 修改班级提交
-     * URL: PUT /class/{id}
-     * @param  Request  $request
-     * @param  int  $user_id
-     */
-    public function userUpdate(Request $request){
-        // 检查登录状态
+    public function userCreate(Request $request){
         if(!Session::has('login')){
-            return loginExpired(); // 未登录，返回登陆视图
+            return loginExpired();  // Have not logged in, redirect to the login page.
         }
-         // 获取表单输入
-        $user_id = $request->input('input_user_id');
-        $user_name = $request->input('input_user_name');
-        $user_gender = $request->input('input_user_gender');
-        $user_birthday = $request->input('input_user_birthday');
-        // 更新数据库
-        try{
-            DB::table('user')
-              ->where('user_id', $user_id)
-              ->update(['user_name' => $user_name,
-                        'user_gender' => $user_gender,
+        return view('/userCreate');
+    }
+
+
+    /**
+     * Store new User
+     * URL: POST /user/store
+     */
+    public function userStore(Request $request){
+        // Check login status
+        if(!Session::has('login')){
+            return loginExpired();  // Have not logged in, redirect to the login page.
+        }
+        // Get the form input
+        $user_id = $request->input('user_id');
+        $user_password = $request->input('user_password');
+        $user_first_name = $request->input('user_first_name');
+        $user_last_name = $request->input('user_last_name');
+        $user_title = $request->input('user_title');
+        $user_birthday = $request->input('user_birthday');
+        $user_email = $request->input('user_email');
+        $user_is_casual_academic = $request->input('user_is_casual_academic');
+        $user_is_uos_coordinator = $request->input('user_is_uos_coordinator');
+        $user_is_deputy_hos = $request->input('user_is_deputy_hos');
+        if($user_is_casual_academic){
+            $user_is_casual_academic = 1;
+        }else{
+            $user_is_casual_academic = 0;
+        }
+
+        if($user_is_uos_coordinator){
+            $user_is_uos_coordinator = 1;
+        }else{
+            $user_is_uos_coordinator = 0;
+        }
+
+        if($user_is_deputy_hos){
+            $user_is_deputy_hos = 1;
+        }else{
+            $user_is_deputy_hos = 0;
+        }
+
+        if(DB::table('user')->where('user_id', $user_id)->where('user_is_available', 1)->exists()){
+            return redirect("/user/create")
+                ->with(['notify' => true,
+                    'type' => 'danger',
+                    'title' => 'Exception!',
+                    'message' => 'The User ID has been used!']);
+        }else{
+            DB::beginTransaction();
+            try{
+                // Insert into database
+                DB::table('user')->insert(
+                    ['user_id' => $user_id,
+                        'user_password' => $user_password,
+                        'user_first_name' => $user_first_name,
+                        'user_last_name' => $user_last_name,
+                        'user_title' => $user_title,
                         'user_birthday' => $user_birthday,
-                        'user_modified_user' => Session::get('user_id'),
-                        'user_modified_time' => date('Y-m-d H:i:s')]);
+                        'user_email' => $user_email,
+                        'user_is_administrator' => 0,
+                        'user_is_deputy_hos' => $user_is_deputy_hos,
+                        'user_is_casual_academic' => $user_is_casual_academic,
+                        'user_is_uos_coordinator' => $user_is_uos_coordinator,
+                        'user_is_available' => 1,
+                        'user_create_user' => Session::get('user_id'),
+                        'user_create_time' => date('Y-m-d H:i:s'),
+                        'user_last_edit_user' => Session::get('user_id'),
+                        'user_last_edit_time' => date('Y-m-d H:i:s')]
+                );
+            }
+                // Exception
+            catch(Exception $e){
+                // Transactions rollback
+                DB::rollBack();
+                return redirect("/user/create")
+                    ->with(['notify' => true,
+                        'type' => 'danger',
+                        'title' => 'Exception!',
+                        'message' => 'Exception!']);
+            }
+//            // Commit transactions
+            DB::commit();
         }
-        // 捕获异常
-        catch(Exception $e){
-            return redirect("/user?id=".encode($user_id, 'user_id'))
-                   ->with(['notify' => true,
-                           'type' => 'danger',
-                           'title' => '用户修改失败',
-                           'message' => '用户修改失败，请重新输入信息']);
+
+        // Start transactions
+
+        // Redirect to the semester page
+        return redirect("/user")
+            ->with(['notify' => true,
+                'type' => 'success',
+                'title' => 'Success!',
+                'message' => 'Success!']);
+    }
+
+    public function userDelete(Request $request){
+        // Check login status
+        if(!Session::has('login')){
+            return loginExpired();  // Have not logged in, redirect to the login page.
         }
-        return redirect("/user?id=".encode($user_id, 'user_id'))
-               ->with(['notify' => true,
-                         'type' => 'success',
-                         'title' => '用户修改成功',
-                         'message' => '用户修改成功!']);
+        // Get semester id
+        $user_id=$request->input('user_id');
+        if(DB::table('user')->where('user_id', $user_id)->where('user_is_administrator', 1)->where('user_is_available', 1)->exists()){
+            return redirect("/user")
+                ->with(['notify' => true,
+                    'type' => 'danger',
+                    'title' => 'Exception!',
+                    'message' => 'Administrator cannot be deleted!']);
+        }else{
+            DB::beginTransaction();
+            try{
+                // Update semester status
+                DB::table('user')
+                    ->where('user_id', $user_id)
+                    ->update(['user_is_available' => 0,
+                        'user_last_edit_user' => Session::get('user_id'),
+                        'user_last_edit_time' => date('Y-m-d H:i:s'),
+                    ]);
+            }
+                // Exception
+            catch(Exception $e){
+                // Transactions rollback
+                DB::rollBack();
+                return redirect("/user")
+                    ->with(['notify' => true,
+                        'type' => 'danger',
+                        'title' => 'Exception!',
+                        'message' => 'Exception!']);
+            }
+            // Commit transactions
+            DB::commit();
+        }
+        // Redirect to the semester page
+        return redirect("/user")
+            ->with(['notify' => true,
+                'type' => 'success',
+                'title' => 'Success!',
+                'message' => 'Success!']);
+    }
+
+    public function userEdit(Request $request){
+        // Check login status
+        if(!Session::has('login')){
+            return loginExpired();  // Have not logged in, redirect to the login page.
+        }
+        $user_id=$request->input('user_id');
+        $type=$request->input('type');
+        if(DB::table('user')->where('user_id', $user_id)->where('user_is_available', 1)->exists()){
+            $db_user = DB::table('user')
+                ->where('user_id', $user_id)
+                ->where('user_is_available', 1)
+                ->first();
+            $user_is_casual_academic = $db_user->user_is_casual_academic;
+            $user_is_uos_coordinator = $db_user->user_is_uos_coordinator;
+            $user_is_deputy_hos = $db_user->user_is_deputy_hos;
+            if($user_is_casual_academic){
+                $user_is_casual_academic = 0;
+            }else{
+                $user_is_casual_academic = 1;
+            }
+            if($user_is_uos_coordinator){
+                $user_is_uos_coordinator = 0;
+            }else{
+                $user_is_uos_coordinator = 1;
+            }
+            if($user_is_deputy_hos){
+                $user_is_deputy_hos = 0;
+            }else{
+                $user_is_deputy_hos = 1;
+            }
+
+            DB::beginTransaction();
+            try{
+                if ( $type == 1){
+                    DB::table('user')
+                        ->where('user_id', $user_id)
+                        ->update(['user_is_casual_academic' => $user_is_casual_academic,
+                            'user_last_edit_user' => Session::get('user_id'),
+                            'user_last_edit_time' => date('Y-m-d H:i:s'),
+                        ]);
+                }elseif ($type == 2){
+                    DB::table('user')
+                        ->where('user_id', $user_id)
+                        ->update(['user_is_uos_coordinator' => $user_is_uos_coordinator,
+                            'user_last_edit_user' => Session::get('user_id'),
+                            'user_last_edit_time' => date('Y-m-d H:i:s'),
+                        ]);
+                }elseif ($type == 3){
+                    DB::table('user')
+                        ->where('user_id', $user_id)
+                        ->update(['user_is_deputy_hos' => $user_is_deputy_hos,
+                            'user_last_edit_user' => Session::get('user_id'),
+                            'user_last_edit_time' => date('Y-m-d H:i:s'),
+                        ]);
+                }
+                // Update semester status
+
+            }
+                // Exception
+            catch(Exception $e){
+                // Transactions rollback
+                DB::rollBack();
+                return redirect("/user")
+                    ->with(['notify' => true,
+                        'type' => 'danger',
+                        'title' => 'Exception!',
+                        'message' => 'Exception!']);
+            }
+            // Commit transactions
+            DB::commit();
+
+        }
+        // Redirect to the semester page
+        return redirect("/user")
+            ->with(['notify' => true,
+                'type' => 'success',
+                'title' => 'Success!',
+                'message' => 'Success!']);
+
     }
 
 }

@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('top_nav_page_name')
-  <h1 class="page-title">USER</h1>
+  <h1 class="page-title">User</h1>
 @endsection
 
 @section('body')
@@ -24,20 +24,58 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">user Name</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">End Date</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Administrator</th>
+                    <th scope="col">Casual Academic</th>
+                    <th scope="col">Coordinator</th>
+                    <th scope="col">Deputy HOS</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   @forelse($db_users as $db_user)
                     <tr>
                       <th>{{$loop->iteration}}</th>
-                      <td>{{$db_user->user_name}}</td>
-                      <td>{{$db_user->user_start}}</td>
-                      <td>{{$db_user->user_end}}</td>
-                      <td class="py-2"><a href="/user/delete?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                      <td>{{$db_user->user_first_name}} {{$db_user->user_last_name}}</td>
+                      <td>{{$db_user->user_email}}</td>
+                      <td>
+                        @if($db_user->user_is_administrator )
+                          <span class="text-success">Yes</span>
+                        @else
+                          <span class="text-danger">No</span>
+                        @endif
+                      </td>
+                      <td>
+                        @if($db_user->user_is_casual_academic === 1)
+                          <span class="text-success">Yes</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                        @else
+                          <span class="text-danger">No</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                        @endif
+                      </td>
+                      <td>
+                        @if($db_user->user_is_uos_coordinator === 1)
+                          <span class="text-success">Yes</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                        @else
+                          <span class="text-danger">No</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                        @endif
+                      </td>
+                      <td>
+                        @if($db_user->user_is_deputy_hos === 1)
+                          <span class="text-success">Yes</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                        @else
+                          <span class="text-danger">No</span>
+                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                        @endif
+                      </td>
+                      <td>
+                        <a href="/user/delete?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-danger py-0">Delete</a>
+                      </td>
                     </tr>
                   @empty
                     <tr>

@@ -25,7 +25,11 @@ Route::get('/coordinator/create ', 'CoordinatorController@CoordinatorCreate');
 
 //Uos
 Route::get('/uos ', 'UosController@Uos');
-Route::get('/uos/create ', 'UosController@UosCreate');
+// Route::get('/uos/create ', 'UosController@UosCreate');
+Route::post('/uos/store ', 'UosController@UosStore');
+Route::get('/uos/page ', 'UosController@UosPage');
+Route::post('/uos/page/tutor/store ', 'UosController@UosPageTutorStore');
+Route::get('/uos/page/tutor/delete ', 'UosController@UosPageTutorDelete');
 
 //Tutorial
 Route::get('/tutorial ', 'TutorialController@Tutorial');
@@ -33,11 +37,11 @@ Route::get('/tutorial/assign ', 'TutorialController@TutorialAssign');
 Route::get('/tutorial/create ', 'tutorialController@TutorialCreate');
 
 //Admin-User
-Route::get('/adminUser', 'AdminUserController@AdminUser');
-Route::get('/adminUser/create', 'AdminUserController@AdminUserCreate');
-Route::post('/adminUser/store', 'AdminUserController@AdminUserStore');
-Route::get('/adminUser/delete', 'AdminUserController@AdminUserDelete');
-Route::get('/adminUser/edit', 'AdminUserController@AdminUserEdit');
+Route::get('/user', 'UserController@user');
+Route::get('/user/create', 'UserController@userCreate');
+Route::post('/user/store', 'UserController@userStore');
+Route::get('/user/delete', 'UserController@userDelete');
+Route::get('/user/edit', 'UserController@userEdit');
 
 
 

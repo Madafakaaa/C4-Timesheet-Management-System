@@ -2,7 +2,7 @@
 <div id="header_top" class="header_top dark">
   <div class="container">
     <div class="hleft">
-      <a href="javascript:void(0)" class="nav-link user_btn"><img class="avatar" src="/assets/images/avatar/avatar1.png" alt="" data-toggle="tooltip" data-placement="right" title="User Menu"/></a>
+      <a href="javascript:void(0)" class="nav-link user_btn"><img class="avatar" src="/assets/images/avatar/avatar_1.png" alt="" data-toggle="tooltip" data-placement="right" title="User Menu"/></a>
       <div class="dropdown">
         <a href="javascript:void(0)" class="nav-link icon menu_toggle"><i class="fe fe-menu"></i></a>
         <a href="#" class="nav-link icon"><i class="text-white fa fa-search" data-toggle="tooltip" data-placement="right" title="Search..."></i></a>

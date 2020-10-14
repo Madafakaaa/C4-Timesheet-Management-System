@@ -17,4 +17,7 @@
 <link rel="stylesheet" href="/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>
 <link rel="stylesheet" href="/assets/plugins/multi-select/css/multi-select.css">
 <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css">
+<link rel="stylesheet" href="/assets/plugins/dragula-master/dist/dragula.min.css">
+
+<script src="/assets/plugins/jquery/jquery.js"></script>
 </head>

@@ -4,6 +4,7 @@
 <script src="/assets/bundles/apexcharts.bundle.js"></script>
 <script src="/assets/bundles/jvectormap2.bundle.js"></script>
 <script src="/assets/js/core.js"></script>
+<script src="/assets/js/form/form-advanced.js"></script>
 
 <!-- Plugin Java Script Content -->
 <script src="/assets/plugins/animate-css/animate.min.css"></script>
@@ -15,6 +16,7 @@
 <script src="/assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js"></script>
 <script src="/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="/assets/plugins/dragula-master/dist/dragula.min.js"></script>
 
 <!-- My Java Script Content -->
 <script src="/assets/js/scripts.js"></script>
