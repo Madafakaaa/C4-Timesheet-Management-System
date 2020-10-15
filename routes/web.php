@@ -24,12 +24,16 @@ Route::get('/coordinator ', 'CoordinatorController@Coordinator');
 Route::get('/coordinator/create ', 'CoordinatorController@CoordinatorCreate');
 
 //Uos
-Route::get('/uos ', 'UosController@Uos');
+Route::get('/uos', 'UosController@Uos');
 // Route::get('/uos/create ', 'UosController@UosCreate');
 Route::post('/uos/store ', 'UosController@UosStore');
 Route::get('/uos/page ', 'UosController@UosPage');
 Route::post('/uos/page/tutor/store ', 'UosController@UosPageTutorStore');
 Route::get('/uos/page/tutor/delete ', 'UosController@UosPageTutorDelete');
+Route::post('/uos/page/tutorial/store ', 'UosController@UosPageTutorialStore');
+Route::get('/uos/page/tutorial/delete ', 'UosController@UosPageTutorialDelete');
+Route::post('/uos/page/coordinator/store ', 'UosController@UosPageCoordinatorStore');
+Route::get('/uos/page/coordinator/delete ', 'UosController@UosPageCoordinatorDelete');
 
 //Tutorial
 Route::get('/tutorial ', 'TutorialController@Tutorial');
@@ -44,5 +48,8 @@ Route::get('/user/delete', 'UserController@userDelete');
 Route::get('/user/edit', 'UserController@userEdit');
 
 
+//Uos Coordinator
+Route::get('/uos/coordinator', 'UosController@UosCoordinator');
 
-//test
+//Uos Tutor
+Route::get('/uos/tutor', 'UosController@UosTutor');

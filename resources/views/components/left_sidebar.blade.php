@@ -8,10 +8,12 @@
       <li id="semester"><a href="/semester"><i class="fa fa-calendar"></i><span>Semester</span></a></li>
       <li id="coordinator"><a href="/user"><i class="fe fe-user"></i><span>User</span></a></li>
       <li id="uos"><a href="/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
+      <li class="g_heading">Deputy</li>
+      <li id=""><a href="/#"><i class="fe fe-book"></i><span>???</span></a></li>
       <li class="g_heading">Coordinator</li>
-      <li id="uos"><a href="/uos"><i class="fe fe-book"></i><span>My UoS</span></a></li>
+      <li id="uos"><a href="/uos/coordinator"><i class="fe fe-book"></i><span>My UoS</span></a></li>
       <li class="g_heading">Casual Academic</li>
-      <li id="uos"><a href="/uos"><i class="fe fe-book"></i><span>My UoS</span></a></li>
+      <li id="uos"><a href="/uos/tutor"><i class="fe fe-book"></i><span>My UoS</span></a></li>
       <!--
       <li>
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-lock"></i><span>Layer1</span></a>

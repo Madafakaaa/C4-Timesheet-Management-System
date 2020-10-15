@@ -58,6 +58,27 @@ var Datepicker = (function() {
   }
 })();
 
+var Timepicker = (function() {
+  // Variables
+  var $timepicker = $('.timepicker');
+  // Methods
+  function init($this) {
+    var options = {
+      disableTouchKeyboard: true,
+      autoclose: false,
+      format: "hh-mm",
+      weekStart: 1
+    };
+    $this.datepicker(options);
+  }
+  // Events
+  if ($timepicker.length) {
+    $timepicker.each(function() {
+      init($(this));
+    });
+  }
+})();
+
 var Monthpicker = (function() {
   // Variables
   var $monthpicker = $('.monthpicker');
