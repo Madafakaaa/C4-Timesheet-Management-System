@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +23,14 @@ class UserController extends Controller
             ->where('user_is_available', 1)
             ->get();
         // 返回列表视图
-        return view('/user', ['db_users' => $db_users]);
+        return view('/administrator/user/user', ['db_users' => $db_users]);
     }
 
     public function userCreate(Request $request){
         if(!Session::has('login')){
             return loginExpired();  // Have not logged in, redirect to the login page.
         }
-        return view('/userCreate');
+        return view('/administrator/user/userCreate');
     }
 
 
@@ -73,11 +73,10 @@ class UserController extends Controller
         }
 
         if(DB::table('user')->where('user_id', $user_id)->where('user_is_available', 1)->exists()){
-            return redirect("/user/create")
-                ->with(['notify' => true,
-                    'type' => 'danger',
-                    'title' => 'Exception!',
-                    'message' => 'The User ID has been used!']);
+            return back()->with(['notify' => true,
+                                 'type' => 'danger',
+                                 'title' => 'Exception!',
+                                 'message' => 'The User ID has been used!']);
         }else{
             DB::beginTransaction();
             try{
@@ -105,24 +104,20 @@ class UserController extends Controller
             catch(Exception $e){
                 // Transactions rollback
                 DB::rollBack();
-                return redirect("/user/create")
-                    ->with(['notify' => true,
-                        'type' => 'danger',
-                        'title' => 'Exception!',
-                        'message' => 'Exception!']);
+                return back()->with(['notify' => true,
+                                    'type' => 'danger',
+                                    'title' => 'Exception!',
+                                    'message' => 'Exception!']);
             }
-//            // Commit transactions
+            // Commit transactions
             DB::commit();
         }
-
-        // Start transactions
-
-        // Redirect to the semester page
-        return redirect("/user")
-            ->with(['notify' => true,
-                'type' => 'success',
-                'title' => 'Success!',
-                'message' => 'Success!']);
+        // Redirect to the user page
+        return redirect("/administrator/user")
+                ->with(['notify' => true,
+                    'type' => 'success',
+                    'title' => 'Success!',
+                    'message' => 'Success!']);
     }
 
     public function userDelete(Request $request){
@@ -133,11 +128,10 @@ class UserController extends Controller
         // Get semester id
         $user_id=$request->input('user_id');
         if(DB::table('user')->where('user_id', $user_id)->where('user_is_administrator', 1)->where('user_is_available', 1)->exists()){
-            return redirect("/user")
-                ->with(['notify' => true,
-                    'type' => 'danger',
-                    'title' => 'Exception!',
-                    'message' => 'Administrator cannot be deleted!']);
+            return back()->with(['notify' => true,
+                                 'type' => 'danger',
+                                 'title' => 'Exception!',
+                                 'message' => 'Administrator cannot be deleted!']);
         }else{
             DB::beginTransaction();
             try{
@@ -153,21 +147,19 @@ class UserController extends Controller
             catch(Exception $e){
                 // Transactions rollback
                 DB::rollBack();
-                return redirect("/user")
-                    ->with(['notify' => true,
-                        'type' => 'danger',
-                        'title' => 'Exception!',
-                        'message' => 'Exception!']);
+                return back()->with(['notify' => true,
+                                    'type' => 'danger',
+                                    'title' => 'Exception!',
+                                    'message' => 'Exception!']);
             }
             // Commit transactions
             DB::commit();
         }
         // Redirect to the semester page
-        return redirect("/user")
-            ->with(['notify' => true,
-                'type' => 'success',
-                'title' => 'Success!',
-                'message' => 'Success!']);
+        return back()->with(['notify' => true,
+                             'type' => 'success',
+                             'title' => 'Success!',
+                             'message' => 'Success!']);
     }
 
     public function userEdit(Request $request){
@@ -225,29 +217,25 @@ class UserController extends Controller
                             'user_last_edit_time' => date('Y-m-d H:i:s'),
                         ]);
                 }
-                // Update semester status
-
             }
                 // Exception
             catch(Exception $e){
                 // Transactions rollback
                 DB::rollBack();
-                return redirect("/user")
-                    ->with(['notify' => true,
-                        'type' => 'danger',
-                        'title' => 'Exception!',
-                        'message' => 'Exception!']);
+                return back()->with(['notify' => true,
+                                     'type' => 'danger',
+                                     'title' => 'Exception!',
+                                     'message' => 'Exception!']);
             }
             // Commit transactions
             DB::commit();
 
         }
-        // Redirect to the semester page
-        return redirect("/user")
-            ->with(['notify' => true,
-                'type' => 'success',
-                'title' => 'Success!',
-                'message' => 'Success!']);
+        // Redirect to the user page
+        return redirect("/administrator/user")->with(['notify' => true,
+                                                      'type' => 'success',
+                                                      'title' => 'Success!',
+                                                      'message' => 'Success!']);
 
     }
 

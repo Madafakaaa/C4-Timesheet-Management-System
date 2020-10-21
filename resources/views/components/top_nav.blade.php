@@ -5,7 +5,7 @@
       <div class="left">
         <!-- Top Navigator Page Name-->
         @section('top_nav_page_name')
-          <h1 class="page-title">COMP5703</h1>
+          <h1 class="page-title">CS46-4 System</h1>
         @show
       </div>
       <div class="right">

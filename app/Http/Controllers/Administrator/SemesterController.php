@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administrator;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +24,7 @@ class SemesterController extends Controller
                           ->orderBy('semester_id', 'asc')
                           ->get();
         // 返回列表视图
-        return view('/semester', ['db_semesters' => $db_semesters]);
+        return view('/administrator/semester/semester', ['db_semesters' => $db_semesters]);
     }
 
     /**
@@ -36,7 +36,7 @@ class SemesterController extends Controller
         if(!Session::has('login')){
             return loginExpired();  // Have not logged in, redirect to the login page.
         }
-        return view('/semesterCreate');
+        return view('/administrator/semester/semesterCreate');
     }
 
     /**
@@ -86,7 +86,6 @@ class SemesterController extends Controller
         catch(Exception $e){
             // Transactions rollback
             DB::rollBack();
-            return $e;
             return back()
                    ->with(['notify' => true,
                            'type' => 'danger',
@@ -96,7 +95,7 @@ class SemesterController extends Controller
         // Commit transactions
         DB::commit();
         // Redirect to the semester page
-        return redirect("/semester")
+        return redirect("/administrator/semester")
                ->with(['notify' => true,
                        'type' => 'success',
                        'title' => 'Success!',
@@ -126,7 +125,7 @@ class SemesterController extends Controller
         catch(Exception $e){
             // Transactions rollback
             DB::rollBack();
-            return redirect("/semester")
+            return redirect("/administrator/semester")
                    ->with(['notify' => true,
                            'type' => 'danger',
                            'title' => 'Exception!',
@@ -135,7 +134,7 @@ class SemesterController extends Controller
         // Commit transactions
         DB::commit();
         // Redirect to the semester page
-        return redirect("/semester")
+        return redirect("/administrator/semester")
                ->with(['notify' => true,
                        'type' => 'success',
                        'title' => 'Success!',

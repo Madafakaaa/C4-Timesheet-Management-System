@@ -1,12 +1,16 @@
 @extends('main')
 
+@section('top_nav_page_name')
+  <h1 class="page-title">User</h1>
+@endsection
+
 @section('body')
 <div class="section-body mt-4">
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-9 col-sm-12">
         <div class="card">
-          <form action="/user/store" method="post" id="form2" name="form2" onsubmit="submitButtonDisable('submitButton1')">
+          <form action="/administrator/user/store" method="post" id="form2" name="form2" onsubmit="submitButtonDisable('submitButton1')">
             @csrf
             <div class="card-header">
               <h3 class="card-title">Create new User</h3>

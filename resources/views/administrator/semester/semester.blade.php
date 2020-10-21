@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-2 mb-2">
-                <a href="/semester/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
+                <a href="/administrator/semester/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
               </div>
               <div class="col-lg-4 offset-lg-6">
                 <input type="text" class="form-control search" placeholder="Search...">
@@ -25,6 +25,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Semester Name</th>
+                    <th scope="col">Weeks</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
                     <th scope="col">End Date</th>
@@ -35,9 +36,10 @@
                     <tr>
                       <th>{{$loop->iteration}}</th>
                       <td>{{$db_semester->semester_name}}</td>
+                      <td>{{$db_semester->semester_duration}}</td>
                       <td>{{$db_semester->semester_start}}</td>
                       <td>{{$db_semester->semester_end}}</td>
-                      <td class="py-2"><a href="/semester/delete?semester_id={{$db_semester->semester_id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                      <td class="py-2"><a href="/administrator/semester/delete?semester_id={{$db_semester->semester_id}}" class="btn btn-sm btn-outline-danger">Delete</a></td>
                     </tr>
                   @empty
                     <tr>

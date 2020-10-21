@@ -7,49 +7,48 @@ Route::get('/exit', 'LoginController@exit');
 // Dashboard
 Route::get('/home', 'HomeController@Home');
 
-// Semester
-Route::get('/semester', 'SemesterController@Semester');
-Route::get('/semester/create', 'SemesterController@SemesterCreate');
-Route::post('/semester/store', 'SemesterController@SemesterStore');
-Route::get('/semester/delete', 'SemesterController@SemesterDelete');
-
-// CA
-Route::get('/casualAcademic', 'CasualAcademicController@CasualAcademic');
-Route::get('/casualAcademic/create', 'CasualAcademicController@CasualAcademicCreate');
-Route::post('/casualAcademic/store', 'CasualAcademicController@CasualAcademicStore');
-Route::get('/casualAcademic/delete', 'CasualAcademicController@CasualAcademicDelete');
-
-// UC
-Route::get('/coordinator ', 'CoordinatorController@Coordinator');
-Route::get('/coordinator/create ', 'CoordinatorController@CoordinatorCreate');
-
-//Uos
-Route::get('/uos', 'UosController@Uos');
-// Route::get('/uos/create ', 'UosController@UosCreate');
-Route::post('/uos/store ', 'UosController@UosStore');
-Route::get('/uos/page ', 'UosController@UosPage');
-Route::post('/uos/page/tutor/store ', 'UosController@UosPageTutorStore');
-Route::get('/uos/page/tutor/delete ', 'UosController@UosPageTutorDelete');
-Route::post('/uos/page/tutorial/store ', 'UosController@UosPageTutorialStore');
-Route::get('/uos/page/tutorial/delete ', 'UosController@UosPageTutorialDelete');
-Route::post('/uos/page/coordinator/store ', 'UosController@UosPageCoordinatorStore');
-Route::get('/uos/page/coordinator/delete ', 'UosController@UosPageCoordinatorDelete');
-
-//Tutorial
-Route::get('/tutorial ', 'TutorialController@Tutorial');
-Route::get('/tutorial/assign ', 'TutorialController@TutorialAssign');
-Route::get('/tutorial/create ', 'tutorialController@TutorialCreate');
-
-//Admin-User
-Route::get('/user', 'UserController@user');
-Route::get('/user/create', 'UserController@userCreate');
-Route::post('/user/store', 'UserController@userStore');
-Route::get('/user/delete', 'UserController@userDelete');
-Route::get('/user/edit', 'UserController@userEdit');
+// Administrator
+  // Semester
+  Route::get('/administrator/semester', 'Administrator\SemesterController@Semester');
+  Route::get('/administrator/semester/create', 'Administrator\SemesterController@SemesterCreate');
+  Route::post('/administrator/semester/store', 'Administrator\SemesterController@SemesterStore');
+  Route::get('/administrator/semester/delete', 'Administrator\SemesterController@SemesterDelete');
+  // User
+  Route::get('/administrator/user', 'Administrator\UserController@user');
+  Route::get('/administrator/user/create', 'Administrator\UserController@userCreate');
+  Route::post('/administrator/user/store', 'Administrator\UserController@userStore');
+  Route::get('/administrator/user/delete', 'Administrator\UserController@userDelete');
+  Route::get('/administrator/user/edit', 'Administrator\UserController@userEdit');
+  // Uos
+  Route::get('/administrator/uos', 'Administrator\UosController@Uos');
+  Route::post('/administrator/uos/store ', 'Administrator\UosController@UosStore');
+  Route::get('/administrator/uos/page ', 'Administrator\UosController@UosPage');
+  Route::post('/administrator/uos/page/tutor/store ', 'Administrator\UosController@UosPageTutorStore');
+  Route::get('/administrator/uos/page/tutor/delete ', 'Administrator\UosController@UosPageTutorDelete');
+  Route::get('/administrator/uos/page/tutor/timesheet ', 'Administrator\UosController@UosPageTutorTimeSheet');
+  Route::post('/administrator/uos/page/tutorial/store ', 'Administrator\UosController@UosPageTutorialStore');
+  Route::get('/administrator/uos/page/tutorial/delete ', 'Administrator\UosController@UosPageTutorialDelete');
+  Route::post('/administrator/uos/page/coordinator/store ', 'Administrator\UosController@UosPageCoordinatorStore');
+  Route::get('/administrator/uos/page/coordinator/delete ', 'Administrator\UosController@UosPageCoordinatorDelete');
+  Route::post('/administrator/uos/page/tutorial/tutor/store ', 'Administrator\UosController@UosPageTutorialTutorStore');
 
 
-//Uos Coordinator
-Route::get('/uos/coordinator', 'UosController@UosCoordinator');
+// Deputy
 
-//Uos Tutor
-Route::get('/uos/tutor', 'UosController@UosTutor');
+
+// Coordinator
+  // Uos
+  Route::get('/coordinator/uos', 'Coordinator\UosController@Uos');
+  Route::get('/coordinator/uos/page ', 'Coordinator\UosController@UosPage');
+  Route::post('/coordinator/uos/page/tutor/store ', 'Coordinator\UosController@UosPageTutorStore');
+  Route::get('/coordinator/uos/page/tutor/delete ', 'Coordinator\UosController@UosPageTutorDelete');
+  Route::post('/coordinator/uos/page/tutorial/store ', 'Coordinator\UosController@UosPageTutorialStore');
+  Route::get('/coordinator/uos/page/tutorial/delete ', 'Coordinator\UosController@UosPageTutorialDelete');
+  Route::post('/coordinator/uos/page/tutorial/tutor/store ', 'Coordinator\UosController@UosPageTutorialTutorStore');
+
+
+// Casual Academic
+  // Uos
+  Route::get('/tutor/uos', 'Tutor\UosController@Uos');
+  Route::get('/tutor/uos/page ', 'Tutor\UosController@UosPage');
+  Route::post('/tutor/uos/page/preference/store', 'Tutor\UosController@UosPagePreferenceStore');

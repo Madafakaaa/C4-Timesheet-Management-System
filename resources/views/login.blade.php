@@ -2,29 +2,17 @@
 @include('components.html_header')
 <body class="font-opensans">
   <div class="auth">
-    <div class="auth_right">
-      <div class="carousel slide" data-ride="carousel" data-interval="3000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/assets/images/slider1.svg" class="img-fluid" alt="login page" />
-            <div class="px-4 mt-4">
-              <h4>Fully Responsive</h4>
-              <p>We are using Bootstrap 4, the world’s most popular framework for building responsive, mobile-first sites.</p>
-            </div>
+    <div class="auth_right" style="height:100%; width:100%;">
+      <div class="carousel slide" data-ride="carousel" data-interval="3000"  style="height:100%; width:100%;">
+        <div class="carousel-inner"  style="height:100%; width:100%;">
+          <div class="carousel-item active"  style="height:100%; width:100%;">
+            <img src="/assets/images/background/bg-1.jpg" style="height:100%; width:100%;"/>
           </div>
-          <div class="carousel-item">
-            <img src="/assets/images/slider2.svg" class="img-fluid" alt="login page" />
-            <div class="px-4 mt-4">
-              <h4>Moving working online</h4>
-              <p>We provide a way to connect you and your colleagues in an easy way!</p>
-            </div>
+          <div class="carousel-item"  style="height:100%; width:100%;">
+            <img src="/assets/images/background/bg-2.jpg" style="height:100%; width:100%;"/>
           </div>
-          <div class="carousel-item">
-            <img src="/assets/images/slider3.svg" class="img-fluid" alt="login page" />
-            <div class="px-4 mt-4">
-              <h4>Online Timesheet Arrangement and Approvement</h4>
-              <p>We manages your timesheets for you!</p>
-            </div>
+          <div class="carousel-item"  style="height:100%; width:100%;">
+            <img src="/assets/images/background/bg-3.jpg" style="height:100%; width:100%;"/>
           </div>
         </div>
       </div>

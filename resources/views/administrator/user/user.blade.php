@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-2 mb-2">
-                <a href="/user/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
+                <a href="/administrator/user/create" class="btn btn-outline-secondary btn-block"><i class="fe fe-plus mr-2"></i>Add New</a>
               </div>
               <div class="col-lg-4 offset-lg-6">
                 <input type="text" class="form-control search" placeholder="Search...">
@@ -49,37 +49,37 @@
                       <td>
                         @if($db_user->user_is_casual_academic === 1)
                           <span class="text-success">Yes</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
                         @else
                           <span class="text-danger">No</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=1" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
                         @endif
                       </td>
                       <td>
                         @if($db_user->user_is_uos_coordinator === 1)
                           <span class="text-success">Yes</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
                         @else
                           <span class="text-danger">No</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=2" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
                         @endif
                       </td>
                       <td>
                         @if($db_user->user_is_deputy_hos === 1)
                           <span class="text-success">Yes</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Revoke</a>
                         @else
                           <span class="text-danger">No</span>
-                          <a href="/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
+                          <a href="/administrator/user/edit?user_id={{$db_user->user_id}}&type=3" class="btn btn-sm btn-default py-0 ml-2">Grant&nbsp;</a>
                         @endif
                       </td>
                       <td>
-                        <a href="/user/delete?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-danger py-0">Delete</a>
+                        <a href="/administrator/user/delete?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-danger py-0">Delete</a>
                       </td>
                     </tr>
                   @empty
                     <tr>
-                      <th colspan="5" class="text-center">Empty</th>
+                      <th colspan="8" class="text-center">Empty</th>
                     </tr>
                   @endforelse
                 </tbody>

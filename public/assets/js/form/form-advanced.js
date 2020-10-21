@@ -42,7 +42,7 @@ $(function() {
 
 
     // Multiselect
-    $('#multiselect1, #multiselect2, #single-selection, #multiselect5, #multiselect6').multiselect({
+    $('.multiselect1, .multiselect2, .single-selection, .multiselect5, .multiselect6').multiselect({
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true,
         maxHeight: 300

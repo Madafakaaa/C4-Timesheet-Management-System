@@ -4,7 +4,7 @@
   <div class="card">
     <div class="card-body">
       <div class="media">
-        <img class="avatar avatar-xl mr-3" src="/assets/images/avatar/avatar1.png" alt="avatar">
+        <img class="avatar avatar-xl mr-3" src="/assets/images/avatar/avatar_1.png" alt="avatar">
         <div class="media-body">
           <h5 class="m-0">{{ Session::get('user_first_name') }} {{ Session::get('user_last_name') }}</h5>
           <p class="text-muted mb-0">{{ Session::get('user_id') }}</p>

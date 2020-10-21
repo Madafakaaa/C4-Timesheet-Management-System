@@ -22,6 +22,7 @@
     @section('body')
     @show
     <!-- Footer Content -->
+    <!--
     <div class="section-body" style="position:fixed; bottom:0; width:100%;">
       <footer class="footer">
         <div class="container-fluid">
@@ -33,6 +34,7 @@
         </div>
       </footer>
     </div>
+    -->
   </div>
 </div>
 <!-- Java Script Content -->

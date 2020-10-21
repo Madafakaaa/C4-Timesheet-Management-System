@@ -1,12 +1,16 @@
 @extends('main')
 
+@section('top_nav_page_name')
+  <h1 class="page-title">SEMESTER</h1>
+@endsection
+
 @section('body')
 <div class="section-body my-5">
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-9 col-sm-12">
         <div class="card mb-6">
-          <form action="/semester/store" method="post" id="form1" name="form1" onsubmit="submitButtonDisable('submitButton1')">
+          <form action="/administrator/semester/store" method="post" id="form1" name="form1" onsubmit="submitButtonDisable('submitButton1')">
             @csrf
             <div class="card-header">
               <h3 class="card-title">Create new semester</h3>
@@ -14,7 +18,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label class="form-label">Semester Name</label>
-                <input type="text" class="form-control" placeholder="Semester Name..." name="semester_name" required maxlength="15" autocomplete="off">
+                <input type="text" class="form-control" placeholder="Semester Name..." name="semester_name" required maxlength="50" autocomplete="off">
               </div>
               <div class="form-group">
                 <label class="form-label">Start Date</label>

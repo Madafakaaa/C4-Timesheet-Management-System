@@ -123,7 +123,7 @@ CREATE TABLE `tutorial` (
   `tutorial_uos` int(10) unsigned NOT NULL COMMENT 'id for the uos',
   `tutorial_name` varchar(15)  NOT NULL COMMENT 'name for the tutorial',
   `tutorial_day_in_week` varchar(15) NOT NULL COMMENT 'which day in the week',
-  `tutorial_duration` int(10) NOT NULL COMMENT 'how many time of tutorial',
+  `tutorial_duration` decimal(10, 1) NOT NULL COMMENT 'how many time of tutorial',
   `tutorial_start_time` time NOT NULL COMMENT 'the time of the start of this tutorial',
   `tutorial_end_time` time NOT NULL COMMENT 'the time of the end of this tutorial',
   `tutorial_location` varchar(255) NOT NULL COMMENT 'the location information of this tutorial',
@@ -158,33 +158,27 @@ CREATE TABLE `preference_casual_academic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `preference_casual_academic`
+-- Table structure for `schedule`
 -- ----------------------------
-
-DROP TABLE IF EXISTS `preference_casual_academic`;
-CREATE TABLE `preference_casual_academic` (
-  `preference_casual_academic_tutorial` int(10) unsigned NOT NULL COMMENT 'id for the tutorial',
-  `preference_casual_academic_user` char(8) NOT NULL COMMENT 'id for the user',
-  `preference_casual_academic_rank` tinyint(4) unsigned NOT NULL COMMENT 'the rank of the preference',
-  PRIMARY KEY (`preference_casual_academic_tutorial`, `preference_casual_academic_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for `marking_schedule`
--- ----------------------------
-
-DROP TABLE IF EXISTS `marking_schedule`;
-CREATE TABLE `marking_schedule` (
-  `marking_schedule_user` char(8) NOT NULL COMMENT 'id for the user',
-  `marking_schedule_uos` int(10) unsigned NOT NULL COMMENT 'id for the uos',
-  `marking_schedule_week` int(10) unsigned NOT NULL COMMENT 'id for the user',
-  `marking_schedule_duration` int(10) unsigned NOT NULL COMMENT 'duration of the schedule',
-  `marking_schedule_due_date` date NOT NULL COMMENT 'the due date of this tutorial work',
-  `marking_schedule_create_user` char(8) NOT NULL COMMENT 'the user when this week plan is created',
-  `marking_schedule_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is created',
-  `marking_schedule_last_edit_user` char(8) NOT NULL COMMENT 'the user who last_edit this week plan',
-  `marking_schedule_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this week plan is last_edit',
-  PRIMARY KEY (`marking_schedule_user`, `marking_schedule_uos`, `marking_schedule_week`)
+DROP TABLE IF EXISTS `schedule`;
+CREATE TABLE `schedule` (
+  `schedule_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id of the schedule',
+  `schedule_user` char(8) NOT NULL COMMENT 'user of the schedule',
+  `schedule_uos` int(10) unsigned NOT NULL COMMENT 'uos of the schedule',
+  `schedule_week` int(10) unsigned NOT NULL COMMENT 'week of the schedule',
+  `schedule_is_marking` tinyint(4) unsigned NOT NULL COMMENT 'the schedule is marking or not',
+  `schedule_allocated_duration` decimal(10, 1) unsigned NOT NULL COMMENT 'allocated/proposed duration of the schedule',
+  `schedule_actual_duration` decimal(10, 1) unsigned NOT NULL COMMENT 'actual duration of the schedule',
+  `schedule_start_date` date NOT NULL COMMENT 'the start date of this schedule',
+  `schedule_due_date` date NOT NULL COMMENT 'the due date of this schedule',
+  `schedule_description` varchar(50) NOT NULL COMMENT 'description of the schedule',
+  `schedule_remark` varchar(50) NOT NULL COMMENT 'the tutor's remark of the schedule',
+  `schedule_status` tinyint(4) unsigned NOT NULL COMMENT 'the status of the schedule (0:, 1:, 2:, 3:)',
+  `schedule_create_user` char(8) NOT NULL COMMENT 'the user who create this schedule',
+  `schedule_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this schedule is created',
+  `schedule_last_edit_user` char(8) NOT NULL COMMENT 'the user who last edited this schedule',
+  `schedule_last_edit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this schedule is last edited',
+  PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

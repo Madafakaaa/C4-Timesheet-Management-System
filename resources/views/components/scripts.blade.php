@@ -17,6 +17,8 @@
 <script src="/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
 <script src="/assets/plugins/dragula-master/dist/dragula.min.js"></script>
+<script src="/assets/bundles/fullcalendar.bundle.js"></script>
+<script src="/assets/bundles/knobjs.bundle.js"></script>
 
 <!-- My Java Script Content -->
 <script src="/assets/js/scripts.js"></script>
