@@ -143,7 +143,7 @@
                         <div class="col-12">
                           <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-tutorial" role="tabpanel" aria-labelledby="pills-tutorial-tab">
-                              <form action="/administrator/uos/page/tutor/timesheet/tutorial/store" method="post">
+                              <form action="/coordinator/uos/page/tutor/timesheet/tutorial/store" method="post">
                                 @csrf
                                 <div class="row">
                                   <div class="col-12">
@@ -180,7 +180,7 @@
                               </form>
                             </div>
                             <div class="tab-pane fade" id="pills-other" role="tabpanel" aria-labelledby="pills-other-tab">
-                              <form action="/administrator/uos/page/tutor/timesheet/other/store" method="post">
+                              <form action="/coordinator/uos/page/tutor/timesheet/other/store" method="post">
                                 @csrf
                                 <div class="row">
                                   <div class="col-12">

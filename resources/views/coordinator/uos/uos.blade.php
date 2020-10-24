@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('top_nav_page_name')
-  <h1 class="page-title">COORDINATOR - MY UNIT OF STUDY</h1>
+  <h1 class="page-title">UNIT OF STUDY</h1>
 @endsection
 
 @section('body')
@@ -29,11 +29,11 @@
           <div class="row row-deck">
             @foreach($db_uoses as $db_uos)
               <div class="col-lg-3 col-md-6 col-sm-12">
-                <a href="/uos/page?id={{$db_uos->uos_id}}">
+                <a href="/coordinator/uos/page?id={{$db_uos->uos_id}}">
                   <div class="card">
                     <div class="card-body">
                       <div class="card-status bg-blue"></div>
-                      <div class="mb-3 px--2"><img src="/assets/images/course/course_1.png" alt=""></div>
+                      <div class="mb-3 px--2" style="opacity: 0.8;">{{getUosImage($db_uos->uos_id, $db_uos->uos_name)}}</div>
                       <div class="mb-2">
                         <h5 class="mb-0">{{$db_uos->uos_name}}<br><small class="text-muted">{{$db_uos->uos_code}}</small></h5>
                         <p class="text-muted">{{$db_uos->semester_name}}</p>
@@ -58,11 +58,11 @@
                   <tr>
                     <td class="text-center width40">
                       <div class="avatar d-block">
-                        <img class="avatar" src="/assets/images/course/course_1.png" alt="avatar">
+                        <img class="avatar" src="/assets/images/gallery/1.jpg" alt="{{$db_uos->uos_name}}">
                       </div>
                     </td>
                     <td>
-                      <div><a href="javascript:void(0);">{{$db_uos->uos_name}}</a></div>
+                      <div><a href="/coordinator/uos/page?id={{$db_uos->uos_id}}">{{$db_uos->uos_name}}</a></div>
                       <div class="text-muted">{{$db_uos->uos_code}}</div>
                     </td>
                     <td class="hidden-xs">
@@ -70,11 +70,6 @@
                     </td>
                     <td class="hidden-sm">
                       <div class="text-muted">{{$db_uos->uos_description}}</div>
-                    </td>
-                    <td class="text-right">
-                      <!-- <a class="btn btn-sm btn-link" href="javascript:void(0)" data-toggle="tooltip" title="Phone"><i class="fa fa-phone"></i></a> -->
-                      <!-- <a class="btn btn-sm btn-link" href="javascript:void(0)" data-toggle="tooltip" title="Mail"><i class="fa fa-envelope"></i></a> -->
-                      <a class="btn btn-sm btn-link hidden-xs js-sweetalert" data-type="confirm" href="/uos/delete?id={{$db_uos->uos_id}}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                 @endforeach

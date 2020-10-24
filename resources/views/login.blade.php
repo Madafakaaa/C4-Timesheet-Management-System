@@ -22,17 +22,15 @@
         <form action="/login" method="post">
           @csrf
           <div class="text-center mb-3">
-            <a class="header-brand" href="#"><i class="fa fa-dashboard brand-logo"></i></a>
+            <a class="header-brand" href="#"><img src="/assets/images/favicon/favicon.ico"></a>
           </div>
           <div class="card-body">
-            <div class="card-title">Login to your account</div>
             <div class="form-group">
               <label class="form-label">User Account</label>
-              <input type="text" class="form-control" name="user_id" placeholder="Enter user account..." required>
+              <input type="text" class="form-control" name="user_id" placeholder="Enter user account..." required autocomplete="off">
             </div>
             <div class="form-group">
-              <label class="form-label">Password<a href="#" class="float-right small">I forgot password</a></label>
-              <input type="password" class="form-control" name="user_password"  placeholder="Enter Password..." required>
+              <input type="password" class="form-control" name="user_password"  placeholder="Enter Password..." required autocomplete="off">
             </div>
             <div class="form-footer">
               <input type="submit" class="btn btn-primary btn-block" value="Sign in">

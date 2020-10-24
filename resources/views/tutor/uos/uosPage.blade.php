@@ -41,39 +41,38 @@
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-timesheet" role="tabpanel" aria-labelledby="pills-timesheet-tab">
             <div class="row clearfix">
-              <div class="col-lg-4 col-md-12">
+              <div class="col-3">
                 <div class="card">
-                  <div class="card-body">
-                    <div class="widgets1">
-                      <div class="icon">
-                        <i class="fe fe-list text-info font-30"></i>
-                      </div>
-                      <div class="details">
-                        <h6 class="mb-0 font600">Total Allocated Hours</h6>
-                        <span class="mb-0">11 Hours</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-body">
+                  <div class="card-body px-2">
                     <div class="widgets1">
                       <div class="icon">
                         <i class="fe fe-clock text-success font-30"></i>
                       </div>
                       <div class="details">
-                        <h6 class="mb-0 font600">Total Working Hours</h6>
-                        <span class="mb-0">6.7 Hours</span>
+                        <h6 class="mb-0 font600">{{$schedule_actual_duration_sum_now}} Hours</h6>
+                        <span class="mb-0">Total Working Hours <br>Til {{date('Y-m-d')}}</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="card">
-                  <div class="card-header pb-0">
+                  <div class="card-body px-2">
+                    <div class="widgets1">
+                      <div class="icon">
+                        <i class="fe fe-list text-info font-30"></i>
+                      </div>
+                      <div class="details">
+                        <h6 class="mb-0 font600">{{$schedule_allocated_duration_sum_now}} Hours</h6>
+                        <span class="mb-0">Total Allocated Hours <br>Til {{date('Y-m-d')}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
                     <h3 class="card-title">Statistics</h3>
                     <div class="card-options">
                       <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                      <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -81,56 +80,123 @@
                       <div class="row">
                         <div class="col-6 pb-3">
                           <label class="mb-0">Working Hours</label>
-                          <h4 class="font-30 font-weight-bold">6.7</h4>
+                          <h4 class="font-30 font-weight-bold">{{$schedule_actual_duration_sum_now}}</h4>
                         </div>
                         <div class="col-6 pb-3">
                           <label class="mb-0">Completion</label>
-                          <h4 class="font-30 font-weight-bold">74.4%</h4>
+                          <h4 class="font-30 font-weight-bold">
+                          @if($schedule_allocated_duration_sum_now!=0)
+                            {{round($schedule_actual_duration_sum_now/$schedule_allocated_duration_sum_now*100,1)}}%
+                          @else
+                            -
+                          @endif
+                          </h4>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="d-block">Week 1<span class="float-right">100%</span></label>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                    @foreach($db_weekly_schedules as $weekly_schedule)
+                      <div class="form-group">
+                        <label class="d-block">{{$weekly_schedule->week_name}}<span class="float-right">{{round($weekly_schedule->schedule_actual_duration_sum/$weekly_schedule->schedule_allocated_duration_sum*100,1)}}%</span></label>
+                        <div class="progress progress-xs">
+                          @if($weekly_schedule->schedule_actual_duration_sum==0)
+                            <div class="progress-bar bg-default" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                          @elseif($weekly_schedule->schedule_actual_duration_sum<$weekly_schedule->schedule_allocated_duration_sum)
+                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{round($weekly_schedule->schedule_actual_duration_sum/$weekly_schedule->schedule_allocated_duration_sum*100,1)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($weekly_schedule->schedule_actual_duration_sum/$weekly_schedule->schedule_allocated_duration_sum*100,1)}}%;"></div>
+                          @elseif($weekly_schedule->schedule_actual_duration_sum==$weekly_schedule->schedule_allocated_duration_sum)
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          @else
+                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          @endif
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="d-block">Week 2<span class="float-right">90%</span></label>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="d-block">Week 3<span class="float-right">0%</span></label>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="d-block">Week 4<span class="float-right">100%</span></label>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="d-block">Week 5<span class="float-right">0%</span></label>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                      </div>
-                    </div>
+                    @endforeach
                   </div>
                 </div>
               </div>
-              <div class="col-lg-8 col-md-12">
+              <div class="col-9">
                 <div class="card mb-0">
                   <div class="card-header">
                     <h3 class="card-title">Time Sheet</h3>
+                    <div class="card-options">
+
+                      <a class="text-primary" data-toggle="modal" data-target="#newScheduleModal"><i class="fa fa-plus" data-toggle="tooltip" data-placement="right" title="Add New"></i></a>
+                      <!-- Modal -->
+                      <div class="modal fade" id="newScheduleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add new</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="/tutor/uos/page/timesheet/store" method="post">
+                                @csrf
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="form-label">Schedule Name</div>
+                                      <div>
+                                        <input type="text" class="form-control" name="schedule_name" placeholder="Schedule Name.." max-length="50" required autocomplete="off">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="form-label">Working Duration (Hour)</div>
+                                      <div>
+                                        <input type="number" class="form-control" name="schedule_actual_duration" value="1" placeholder="Schedule Duration.." min="0.0" step="0.1" required autocomplete="off">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="form-label">Weeks</div>
+                                      <div>
+                                        @foreach($db_weeks as $db_week)
+                                          <label class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" name="week_ids[]" value="{{$db_week->week_id}}" checked>
+                                            <span class="custom-control-label">{{$db_week->week_name}}</span>
+                                          </label>
+                                        @endforeach
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="form-label">Schedule Type</div>
+                                      <div class="custom-controls-stacked">
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" class="custom-control-input" name="schedule_is_marking" value="1" checked>
+                                          <span class="custom-control-label">Marking</span>
+                                        </label>
+                                        <label class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" class="custom-control-input" name="schedule_is_marking" value="0">
+                                          <span class="custom-control-label">Non-marking</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 mt-2">
+                                    <input type="hidden" name="schedule_uos" value="{{$db_uos->uos_id}}">
+                                    <input type="hidden" name="schedule_user" value="{{Session::get('user_id')}}">
+                                    <input type="submit" class="btn btn-primary btn-block" value="Add">
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
                   </div>
                 </div>
                 <div class="card bg-none b-none">
                   <div class="card-body pt-0">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="max-height:800px;">
                       <table class="table table-hover table-vcenter table_custom spacing5 text-nowrap mb-0">
                         <thead>
                           <tr>
@@ -138,106 +204,146 @@
                             <th>Schedule Name</th>
                             <th>Week</th>
                             <th>Due Date</th>
-                            <th class="text-right">Working / Allocated Hours</th>
+                            <th class="text-right">Working Hours</th>
+                            <th>Status</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>
-                              <i class="fe fe-book text-success"></i>
-                            </td>
-                            <td>Tutorial - Mon10A</td>
-                            <td>Week 1</td>
-                            <td><span>Oct 7, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right text-success">
-                                <label>2H / 2H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          @forelse ($db_schedules as $schedule)
+                            <tr>
+                              <td>
+                                @if($schedule->schedule_is_marking==1)
+                                  <i class="fe fe-check-square"></i>
+                                @else
+                                  <i class="fe fe-book"></i>
+                                @endif
+                              </td>
+                              <td>{{$schedule->schedule_name}}</td>
+                              <td>{{$schedule->week_name}}</td>
+                              <td><span>{{$schedule->schedule_due_date}}</span></td>
+                              <td>
+                                <div class="form-group text-right">
+                                  <label>{{$schedule->schedule_actual_duration}}H / {{$schedule->schedule_allocated_duration}}H</label>
+                                  <div class="progress progress-xs">
+                                    @if($schedule->schedule_allocated_duration!=0)
+                                      @if($schedule->schedule_status==0)
+                                        <div class="progress-bar bg-grey" role="progressbar" aria-valuenow="{{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}%;"></div>
+                                      @elseif($schedule->schedule_status==1)
+                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="{{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}%;"></div>
+                                      @elseif($schedule->schedule_status==2)
+                                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}%;"></div>
+                                      @else
+                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{round($schedule->schedule_actual_duration/$schedule->schedule_allocated_duration*100,1)}}%;"></div>
+                                      @endif
+                                    @else
+                                      @if($schedule->schedule_status==0)
+                                        <div class="progress-bar bg-grey" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                      @elseif($schedule->schedule_status==1)
+                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                      @elseif($schedule->schedule_status==2)
+                                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                      @else
+                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                      @endif
+                                    @endif
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i class="fe fe-check-square text-danger"></i>
-                            </td>
-                            <td>Quiz 1</td>
-                            <td>Week 2</td>
-                            <td><span>Oct 38, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right text-danger">
-                                <label>1.5H / 1H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="150" aria-valuemin="0" aria-valuemax="100" style="width: 150%;"></div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i class="fe fe-book text-warning"></i>
-                            </td>
-                            <td>Tutorial - Mon10A</td>
-                            <td>Week 2</td>
-                            <td><span>Oct 14, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right text-warning">
-                                <label>1.2H / 2H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i class="fe fe-book"></i>
-                            </td>
-                            <td>Tutorial - Mon10A</td>
-                            <td>Week 3</td>
-                            <td><span>Oct 21, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right">
-                                <label>- / 2H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i class="fe fe-book text-success"></i>
-                            </td>
-                            <td>Tutorial - Mon10A</td>
-                            <td>Week 4</td>
-                            <td><span>Oct 28, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right text-success">
-                                <label>2H / 2H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <i class="fe fe-book"></i>
-                            </td>
-                            <td>Tutorial - Mon10A</td>
-                            <td>Week 5</td>
-                            <td><span>Nov 4, 2020</span></td>
-                            <td>
-                              <div class="form-group text-right">
-                                <label>- / 2H</label>
-                                <div class="progress progress-xs">
-                                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                              </td>
+                              <td>
+                                @if($schedule->schedule_status==0)
+                                  <span class="status-icon bg-default"></span>Proposed Hour Pending
+                                @elseif($schedule->schedule_status==1)
+                                  <span class="status-icon bg-primary"></span>Due in {{$schedule->week_name}}
+                                @elseif($schedule->schedule_status==2)
+                                  <span class="status-icon bg-danger"></span>Working Hour Pending
+                                @else
+                                  <span class="status-icon bg-success"></span>Pass
+                                @endif
+                              </td>
+                              <td class="text-right">
+                                @if($schedule->schedule_status==1)
+                                  <!-- Button trigger modal -->
+                                  <button type="button" class="btn btn-sm btn-link hidden-xs" data-toggle="modal" data-target="#scheduleModal-{{$schedule->schedule_id}}">
+                                      <i class="fe fe-edit text-primary"></i>
+                                  </button>
+                                  <!-- Modal -->
+                                  <div class="modal fade text-left" id="scheduleModal-{{$schedule->schedule_id}}" tabindex="-1" role="dialog" aria-labelledby="scheduleModalLabel-{{$schedule->schedule_id}}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="scheduleModalLabel-{{$schedule->schedule_id}}">{{$schedule->schedule_name}}</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <form action="/tutor/uos/page/timesheet/update" method="post">
+                                            @csrf
+                                            <div class="row">
+                                              <div class="col-12">
+                                                <div class="form-group">
+                                                  <div class="form-label">Working Duration (Hour)</div>
+                                                  <div>
+                                                    <input type="number" class="form-control" name="schedule_actual_duration" value="{{$schedule->schedule_allocated_duration}}" min="0.0" step="0.1" required autocomplete="off">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-12 mt-2">
+                                                <input type="hidden" name="schedule_id" value="{{$schedule->schedule_id}}">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                @elseif($schedule->schedule_status==3)
+                                  @if($schedule->schedule_allocated_duration>=$schedule->schedule_actual_duration)
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-sm btn-link hidden-xs" data-toggle="modal" data-target="#scheduleModal-{{$schedule->schedule_id}}">
+                                        <i class="fe fe-edit text-primary"></i>
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade text-left" id="scheduleModal-{{$schedule->schedule_id}}" tabindex="-1" role="dialog" aria-labelledby="scheduleModalLabel-{{$schedule->schedule_id}}" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="scheduleModalLabel-{{$schedule->schedule_id}}">{{$schedule->schedule_name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <form action="/tutor/uos/page/timesheet/update" method="post">
+                                              @csrf
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <div class="form-group">
+                                                    <div class="form-label">Working Duration (Hour)</div>
+                                                    <div>
+                                                      <input type="number" class="form-control" name="schedule_actual_duration" value="{{$schedule->schedule_allocated_duration}}" min="0.0" step="0.1" required autocomplete="off">
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+                                                  <input type="hidden" name="schedule_id" value="{{$schedule->schedule_id}}">
+                                                  <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                                                </div>
+                                              </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  @endif
+                                @endif
+                              </td>
+                            </tr>
+                          @empty
+                            <tr class="text-center"><td colspan="7">No Schedule</td></tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>
@@ -245,6 +351,7 @@
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="tab-pane fade" id="pills-tutorial" role="tabpanel" aria-labelledby="pills-tutorial-tab">

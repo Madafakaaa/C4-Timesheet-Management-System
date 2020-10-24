@@ -160,9 +160,11 @@ CREATE TABLE `preference_casual_academic` (
 -- ----------------------------
 -- Table structure for `schedule`
 -- ----------------------------
+
 DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE `schedule` (
   `schedule_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id of the schedule',
+  `schedule_name` varchar(50) NOT NULL COMMENT 'name of the schedule',
   `schedule_user` char(8) NOT NULL COMMENT 'user of the schedule',
   `schedule_uos` int(10) unsigned NOT NULL COMMENT 'uos of the schedule',
   `schedule_week` int(10) unsigned NOT NULL COMMENT 'week of the schedule',
@@ -171,9 +173,8 @@ CREATE TABLE `schedule` (
   `schedule_actual_duration` decimal(10, 1) unsigned NOT NULL COMMENT 'actual duration of the schedule',
   `schedule_start_date` date NOT NULL COMMENT 'the start date of this schedule',
   `schedule_due_date` date NOT NULL COMMENT 'the due date of this schedule',
-  `schedule_description` varchar(50) NOT NULL COMMENT 'description of the schedule',
-  `schedule_remark` varchar(50) NOT NULL COMMENT 'the tutor's remark of the schedule',
-  `schedule_status` tinyint(4) unsigned NOT NULL COMMENT 'the status of the schedule (0:, 1:, 2:, 3:)',
+  `schedule_remark` varchar(50) NOT NULL COMMENT 'the tutors remark of the schedule',
+  `schedule_status` tinyint(4) unsigned NOT NULL COMMENT 'the status of the schedule (0:刚创建需要DEPUTY通过, 1:deputy通过，等tutor上传实际工作时间, 2:tutor上传实际时间等admin、coor审批，3:admin，coor通过)',
   `schedule_create_user` char(8) NOT NULL COMMENT 'the user who create this schedule',
   `schedule_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this schedule is created',
   `schedule_last_edit_user` char(8) NOT NULL COMMENT 'the user who last edited this schedule',
@@ -181,6 +182,27 @@ CREATE TABLE `schedule` (
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- ----------------------------
+-- Table structure for `notification`
+-- ----------------------------
+
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE `notification` (
+  `notification_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id of the notification',
+  `notification_user` char(8) NOT NULL COMMENT 'user of the notification',
+  `notification_type` varchar(30) NOT NULL COMMENT 'type of the notification',
+  `notification_content` varchar(255) NOT NULL COMMENT 'content of the notification',
+  `notification_is_read` tinyint(4) unsigned NOT NULL DEFAULT 0 COMMENT 'status of the notification',
+  `notification_create_user` char(8) NOT NULL COMMENT 'the user who create this notification',
+  `notification_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this notification is created',
+  PRIMARY KEY (`notification_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `user` VALUES ('tiyu3403', '000000', 'Tianyang', 'Yu', 'Mr', '2020-10-05', 'tiyu3403@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'tiyu3403', '2020-10-21 17:30:41', 'tiyu3403', '2020-10-21 17:30:41');
+INSERT INTO `user` VALUES ('yshi9422', '000000', 'Yuhao', 'Shi', 'Mr', '2020-10-06', 'yshi9422@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'yshi9422', '2020-10-21 17:29:24', 'yshi9422', '2020-10-21 17:29:24');
+INSERT INTO `user` VALUES ('ziyi3049', '000000', 'Ziyue', 'Yi', 'Mr', '2020-10-06', 'ziyi3049@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'ziyi3049', '2020-10-21 17:28:14', 'ziyi3049', '2020-10-21 17:28:14');
+INSERT INTO `user` VALUES ('zzha4377', '000000', 'Ziyi', 'Zhang', 'Mr', '2020-10-06', 'zzha4377@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'zzha4377', '2020-10-21 17:24:44', 'zzha4377', '2020-10-21 17:24:44');
 
 
 

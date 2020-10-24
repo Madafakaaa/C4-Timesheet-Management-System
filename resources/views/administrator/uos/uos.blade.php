@@ -34,7 +34,7 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="card-status bg-blue"></div>
-                      <div class="mb-3 px--2" style="opacity: 0.8;"><img src="/assets/images/gallery/1.jpg" alt="{{$db_uos->uos_name}}"></div>
+                      <div class="mb-3 px--2" style="opacity: 0.8;">{{getUosImage($db_uos->uos_id, $db_uos->uos_name)}}</div>
                       <div class="mb-2">
                         <h5 class="mb-0">{{$db_uos->uos_name}}<br><small class="text-muted">{{$db_uos->uos_code}}</small></h5>
                         <p class="text-muted">{{$db_uos->semester_name}}</p>

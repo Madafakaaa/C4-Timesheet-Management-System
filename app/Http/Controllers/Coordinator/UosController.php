@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Administrator;
+namespace App\Http\Controllers\Coordinator;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +21,10 @@ class UosController extends Controller
         // get all uos
         $db_uoses = DB::table('uos')
                       ->join('semester', 'uos.uos_semester', '=', 'semester.semester_id')
+                      ->join('uos_coordinator', 'uos_coordinator.uos_coordinator_uos', '=', 'uos.uos_id')
                       ->where('uos_is_available', 1)
                       ->where('semester_is_available', 1)
+                      ->where('uos_coordinator_user', Session::get('user_id'))
                       ->orderBy('uos_id', 'asc')
                       ->get();
         // get all semesters
@@ -31,7 +33,7 @@ class UosController extends Controller
                           ->orderBy('semester_id', 'asc')
                           ->get();
         // return view
-        return view('/administrator/uos/uos', ['db_semesters' => $db_semesters, 'db_uoses' => $db_uoses]);
+        return view('/coordinator/uos/uos', ['db_semesters' => $db_semesters, 'db_uoses' => $db_uoses]);
     }
 
     public function uosStore(Request $request){
@@ -205,7 +207,7 @@ class UosController extends Controller
                                ->where('user_is_uos_coordinator', 1)
                                ->get();
         // return view
-        return view('/administrator/uos/uosPage', ['db_uos' => $db_uos,
+        return view('/coordinator/uos/uosPage', ['db_uos' => $db_uos,
                                                    'db_coordinators' => $db_coordinators,
                                                    'array_tutors' => $array_tutors,
                                                    'array_tutorials' => $array_tutorials,
@@ -547,7 +549,7 @@ class UosController extends Controller
                                   ->orderBy('schedule_week', 'asc')
                                   ->get();
         // return view
-        return view('/administrator/uos/uosPageTutorTimesheet', ['db_uos' => $db_uos,
+        return view('/coordinator/uos/uosPageTutorTimesheet', ['db_uos' => $db_uos,
                                                                  'db_user' => $db_user,
                                                                  'db_tutorials' => $db_tutorials,
                                                                  'db_weeks' => $db_weeks,

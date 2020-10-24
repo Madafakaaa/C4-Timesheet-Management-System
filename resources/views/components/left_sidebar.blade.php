@@ -5,29 +5,24 @@
     <ul class="metismenu mt-4">
       <li id="dashboard"><a href="/home"><i class="icon-home"></i><span>Home</span></a></li>
 
-
       <li class="g_heading">Administrator</li>
       <li><a href="/administrator/semester"><i class="fa fa-calendar"></i><span>Semester</span></a></li>
       <li><a href="/administrator/user"><i class="fe fe-user"></i><span>User</span></a></li>
       <li><a href="/administrator/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
-      <li><a href="#"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
-
+      <li><a href="/administrator/timesheet"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
 
       <li class="g_heading">Deputy</li>
-      <li><a href="/administrator/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
-      <li><a href="#"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
-
+      <li><a href="/deputy/timesheet"><i class="fe fe-check-square"></i><span>Proposed Timesheet</span></a></li>
 
       <li class="g_heading">Coordinator</li>
-      <li id="uos"><a href="/administrator/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
-      <li><a href="/administrator/user"><i class="fe fe-user"></i><span>Casual Academic</span></a></li>
-      <li><a href="#"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
-
+      <li><a href="/coordinator/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
+      <li><a href="/coordinator/tutor"><i class="fe fe-user"></i><span>Casual Academic</span></a></li>
+      <li><a href="/coordinator/timesheet"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
 
       <li class="g_heading">Casual Academic</li>
-      <li id="uos"><a href="/tutor/uos"><i class="fe fe-book"></i><span>My UoS</span></a></li>
-      <li id="uos"><a href="/tutor/timesheet"><i class="fa fa-list"></i><span>My Time Sheet</span></a></li>
-
+      <li><a href="/tutor/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
+      <li><a href="/tutor/timesheet"><i class="fa fa-list"></i><span>Time Sheet</span></a></li>
+      <li><a href="/tutor/tutorial"><i class="fe fe-users"></i><span>Tutorial</span></a></li>
 
       <!-- sublist template
       <li>
