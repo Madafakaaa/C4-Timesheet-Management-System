@@ -37,6 +37,10 @@ class TimesheetController extends Controller
         }
         // Get the get parameters
         $schedule_id = $request->input('schedule_id');
+        $db_schedule = DB::table('schedule')
+                          ->join('user', 'schedule.schedule_user', '=', 'user.user_id')
+                          ->where('schedule_id', $schedule_id)
+                          ->first();
         // Start transactions
         DB::beginTransaction();
         try{
@@ -44,6 +48,8 @@ class TimesheetController extends Controller
             DB::table('schedule')
               ->where('schedule_id', $schedule_id)
               ->update(['schedule_status' => 3]);
+            storeNotification($db_schedule->user_id, "approved", "Your schedule [{$db_schedule->schedule_name}] has been approved!");
+
         }
         // Exception
         catch(Exception $e){
@@ -70,6 +76,10 @@ class TimesheetController extends Controller
         }
         // Get the get parameters
         $schedule_id = $request->input('schedule_id');
+        $db_schedule = DB::table('schedule')
+                          ->join('user', 'schedule.schedule_user', '=', 'user.user_id')
+                          ->where('schedule_id', $schedule_id)
+                          ->first();
         // Start transactions
         DB::beginTransaction();
         try{
@@ -78,6 +88,7 @@ class TimesheetController extends Controller
               ->where('schedule_id', $schedule_id)
               ->update(['schedule_status' => 1,
                         'schedule_actual_duration' => 0]);
+            storeNotification($db_schedule->user_id, "rejected", "Your schedule [{$db_schedule->schedule_name}] has been rejected!");
         }
         // Exception
         catch(Exception $e){

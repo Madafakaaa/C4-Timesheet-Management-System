@@ -14,23 +14,26 @@
             <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-1" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-primary nav-unread"></span></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
               <ul class="list-unstyled feeds_widget">
-                <li>
-                  <div class="feeds-left"><i class="fa fa-check"></i></div>
-                  <div class="feeds-body">
-                    <h4 class="title text-danger">Issue Fixed <small class="float-right text-muted">11:05</small></h4>
-                    <small>WE have fix all Design bug with Responsive</small>
-                  </div>
-                </li>
-                <li>
-                  <div class="feeds-left"><i class="fa fa-shopping-cart"></i></div>
-                  <div class="feeds-body">
-                    <h4 class="title">7 New Orders <small class="float-right text-muted">11:35</small></h4>
-                    <small>You received a new oder from Tina.</small>
-                  </div>
-                </li>
+                @foreach(Session::get('notifications') as $notification)
+                  <li>
+                    @if($notification->notification_type=="info")
+                      <div class="feeds-left"><i class="fe fe-info"></i></div>
+                    @elseif($notification->notification_type=="approved")
+                      <div class="feeds-left"><i class="fe fe-user-check text-success"></i></div>
+                    @elseif($notification->notification_type=="rejected")
+                      <div class="feeds-left"><i class="fe fe-user-x text-danger"></i></div>
+                    @else
+                      <div class="feeds-left"><i class="fe fe-info"></i></div>
+                    @endif
+                    <div class="feeds-body">
+                      <h4 class="title">{{$notification->notification_type}}<small class="float-right text-muted">{{$notification->notification_create_time}}</small></h4>
+                      <small>{{$notification->notification_content}}</small>
+                    </div>
+                  </li>
+                @endforeach
               </ul>
               <div class="dropdown-divider"></div>
-              <a href="javascript:void(0)" class="dropdown-item text-center text-muted-dark readall">Mark all as read</a>
+              <a href="/notification" class="dropdown-item text-center text-muted-dark readall">View all</a>
             </div>
           </div>
           <div class="dropdown d-flex">

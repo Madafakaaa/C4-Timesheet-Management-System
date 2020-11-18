@@ -16,18 +16,19 @@
         <li class="g_heading">Deputy</li>
         <li><a href="/deputy/timesheet"><i class="fe fe-check-square"></i><span>Proposed Timesheet</span></a></li>
       @endif
-      @if(Session::get('user_is_casual_academic')==1)
+      @if(Session::get('user_is_uos_coordinator')==1)
         <li class="g_heading">Coordinator</li>
         <li><a href="/coordinator/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
         <li><a href="/coordinator/tutor"><i class="fe fe-user"></i><span>Casual Academic</span></a></li>
         <li><a href="/coordinator/timesheet"><i class="fe fe-check-square"></i><span>Timesheet Approval</span></a></li>
       @endif
-      @if(Session::get('user_is_uos_coordinator')==1)
+      @if(Session::get('user_is_casual_academic')==1)
         <li class="g_heading">Casual Academic</li>
         <li><a href="/tutor/uos"><i class="fe fe-book"></i><span>UoS</span></a></li>
         <li><a href="/tutor/timesheet"><i class="fa fa-list"></i><span>Time Sheet</span></a></li>
         <li><a href="/tutor/tutorial"><i class="fe fe-users"></i><span>Tutorial</span></a></li>
       @endif
+      <li><a href="/notification"><i class="fe fe-bell"></i><span>Notification</span></a></li>
       <!-- sublist template
       <li>
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-lock"></i><span>Layer1</span></a>

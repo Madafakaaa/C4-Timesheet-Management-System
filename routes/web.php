@@ -18,9 +18,7 @@ Route::get('/home', 'HomeController@Home');
   Route::get('/administrator/user/create', 'Administrator\UserController@userCreate');
   Route::post('/administrator/user/store', 'Administrator\UserController@userStore');
   Route::get('/administrator/user/delete', 'Administrator\UserController@userDelete');
-  Route::get('/administrator/user/update', 'Administrator\UserController@userUpdate');
   Route::get('/administrator/user/edit', 'Administrator\UserController@userEdit');
-  Route::post('/administrator/user/update_store', 'Administrator\UserController@userUpdateStore');
   // Uos
   Route::get('/administrator/uos', 'Administrator\UosController@Uos');
   Route::post('/administrator/uos/store', 'Administrator\UosController@UosStore');
@@ -86,4 +84,10 @@ Route::get('/home', 'HomeController@Home');
   Route::get('/tutor/tutorial', 'Tutor\TutorialController@tutorial');
 
 
-  Route::get('/test/data/generate', 'Test\DataController@dataGenerate');
+// Notification
+Route::get('/notification', 'Notification\NotificationController@notification');
+Route::get('/notification/mark', 'Notification\NotificationController@notificationMark');
+Route::get('/notification/markall', 'Notification\NotificationController@notificationMarkAll');
+
+
+Route::get('/test/data/generate', 'Test\DataController@dataGenerate');

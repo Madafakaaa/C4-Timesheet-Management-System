@@ -62,7 +62,6 @@
                         <th>Casual Academic</th>
                         <th>Email</th>
                         <th>Tutorials</th>
-                        <th>Time Sheet</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -84,15 +83,7 @@
                                {{getTutorialTag($tutorial['tutorial_name'], $tutorial['tutorial_day_in_week'])}}
                              @endforeach
                           </td>
-                          <td>
-                            <div class="form-group">
-                              <label class="d-block">Working Hour / Allocated Hour<span class="float-right">6.7H / 11H</span></label>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="text-right">
+                          <td class="text-left">
                             <a class="btn btn-sm btn-link hidden-xs" href="/coordinator/uos/page/tutor/timesheet?user_id={{$tutor['user_id']}}&uos_id={{$db_uos->uos_id}}"><i class="fa fa-list text-primary"></i></a>
                             <a class="btn btn-sm btn-link hidden-xs" href="/coordinator/uos/page/tutor/delete?user_id={{$tutor['user_id']}}&uos_id={{$db_uos->uos_id}}"><i class="fa fa-trash text-danger"></i></a>
                           </td>

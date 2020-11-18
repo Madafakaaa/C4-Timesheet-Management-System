@@ -74,7 +74,6 @@
                         @endif
                       </td>
                       <td>
-                        <a href="/administrator/user/update?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-primary py-0">Edit</a>
                         <a href="/administrator/user/delete?user_id={{$db_user->user_id}}" class="btn btn-sm btn-outline-danger py-0">Delete</a>
                       </td>
                     </tr>

@@ -223,6 +223,10 @@ class UosController extends Controller
         // Get the form input
         $uos_casual_academic_user = $request->input('uos_casual_academic_user');
         $uos_casual_academic_uos = $request->input('uos_casual_academic_uos');
+        $db_uos = DB::table('uos')
+                    ->join('semester', 'uos.uos_semester', '=', 'semester.semester_id')
+                    ->where('uos_id', $uos_casual_academic_uos)
+                    ->first();
         // Start transactions
         DB::beginTransaction();
         try{
@@ -234,6 +238,8 @@ class UosController extends Controller
                  'uos_casual_academic_create_user' => Session::get('user_id'),
                  'uos_casual_academic_last_edit_user' => Session::get('user_id')]
             );
+           storeNotification($uos_casual_academic_user, "info", "You have been assigned to {$db_uos->uos_code} {$db_uos->uos_name} as a tutor");
+
         }
         // Exception
         catch(Exception $e){
@@ -451,6 +457,10 @@ class UosController extends Controller
         // Get the form input
         $tutorial_casual_academic_tutorial = $request->input('tutorial_casual_academic_tutorial');
         $tutorial_casual_academic_user = $request->input('tutorial_casual_academic_user');
+        $db_tutorial = DB::table('tutorial')
+                         ->join('uos', 'uos.uos_id', '=', 'tutorial.tutorial_uos')
+                         ->where('tutorial_id', $tutorial_casual_academic_tutorial)
+                         ->first();
         // Start transactions
         DB::beginTransaction();
         try{
@@ -459,6 +469,7 @@ class UosController extends Controller
                 ['tutorial_casual_academic_tutorial' => $tutorial_casual_academic_tutorial,
                  'tutorial_casual_academic_user' => $tutorial_casual_academic_user]
             );
+           storeNotification($tutorial_casual_academic_user, "info", "You have been assigned to {$db_tutorial->uos_code} {$db_tutorial->uos_name} - tutorial: {$db_tutorial->tutorial_name}!");
         }
         // Exception
         catch(Exception $e){

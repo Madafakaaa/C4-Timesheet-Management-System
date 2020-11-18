@@ -5,6 +5,7 @@
 <script src="/assets/bundles/jvectormap2.bundle.js"></script>
 <script src="/assets/js/core.js"></script>
 <script src="/assets/js/form/form-advanced.js"></script>
+<script src="/assets/bundles/echarts.bundle.js"></script>
 
 <!-- Plugin Java Script Content -->
 <script src="/assets/plugins/animate-css/animate.min.css"></script>
@@ -19,6 +20,7 @@
 <script src="/assets/plugins/dragula-master/dist/dragula.min.js"></script>
 <script src="/assets/bundles/fullcalendar.bundle.js"></script>
 <script src="/assets/bundles/knobjs.bundle.js"></script>
+<script src="/assets/js/chart/echart.js"></script>
 
 <!-- My Java Script Content -->
 <script src="/assets/js/scripts.js"></script>
