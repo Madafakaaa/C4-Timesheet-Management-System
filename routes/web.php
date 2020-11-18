@@ -18,7 +18,9 @@ Route::get('/home', 'HomeController@Home');
   Route::get('/administrator/user/create', 'Administrator\UserController@userCreate');
   Route::post('/administrator/user/store', 'Administrator\UserController@userStore');
   Route::get('/administrator/user/delete', 'Administrator\UserController@userDelete');
+  Route::get('/administrator/user/update', 'Administrator\UserController@userUpdate');
   Route::get('/administrator/user/edit', 'Administrator\UserController@userEdit');
+  Route::post('/administrator/user/update_store', 'Administrator\UserController@userUpdateStore');
   // Uos
   Route::get('/administrator/uos', 'Administrator\UosController@Uos');
   Route::post('/administrator/uos/store', 'Administrator\UosController@UosStore');
