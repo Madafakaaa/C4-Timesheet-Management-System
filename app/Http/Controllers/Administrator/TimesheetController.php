@@ -35,6 +35,7 @@ class TimesheetController extends Controller
         if(!Session::has('login')){
             return loginExpired();  // Have not logged in, redirect to the login page.
         }
+
         // Get the get parameters
         $schedule_id = $request->input('schedule_id');
         $db_schedule = DB::table('schedule')
@@ -63,10 +64,52 @@ class TimesheetController extends Controller
         // Commit transactions
         DB::commit();
         // Redirect to the semester page
+
+
+        $schedule_user = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_user','schedule_week','schedule_name');
+
+        $schedule_week = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_week');
+
+        $schedule_name = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_name');
+
+
+        $notification_type = "Approve";
+        $notification_content = $schedule_name . " Week " . $schedule_week;
+        $notification_is_read = 0;
+
+        DB::beginTransaction();
+        try{
+           $notification_id = DB::table('notification')
+            ->insertGetId(
+                ['notification_user' => $schedule_user,
+                 'notification_type' => $notification_type,
+                 'notification_content' => $notification_content,
+                 'notification_is_read' => $notification_is_read,
+                 'notification_create_user' => Session::get('user_id')]
+            );}
+        catch(Exception $e){
+            // Transactions rollback
+            DB::rollBack();
+            return back()->with(['notify' => true,
+                                 'type' => 'danger',
+                                 'title' => 'Exception!',
+                                 'message' => 'Exception!']);
+        }
+        // Commit transactions
+        DB::commit();
+        // Redirect to the semester page
         return back()->with(['notify' => true,
                              'type' => 'success',
                              'title' => 'Success!',
                              'message' => 'Success!']);
+
+
     }
 
     public function timeSheetReject(Request $request){
@@ -101,10 +144,50 @@ class TimesheetController extends Controller
         }
         // Commit transactions
         DB::commit();
+
+        $schedule_user = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_user','schedule_week','schedule_name');
+
+        $schedule_week = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_week');
+
+        $schedule_name = DB::table('schedule')
+                            ->where('schedule_id',$schedule_id)
+                            ->value('schedule_name');
+
+
+        $notification_type = "Reject";
+        $notification_content = $schedule_name . " Week " . $schedule_week;
+        $notification_is_read = 0;
+
+        DB::beginTransaction();
+        try{
+           $notification_id = DB::table('notification')
+            ->insertGetId(
+                ['notification_user' => $schedule_user,
+                 'notification_type' => $notification_type,
+                 'notification_content' => $notification_content,
+                 'notification_is_read' => $notification_is_read,
+                 'notification_create_user' => Session::get('user_id')]
+            );}
+        catch(Exception $e){
+            // Transactions rollback
+            DB::rollBack();
+            return back()->with(['notify' => true,
+                                 'type' => 'danger',
+                                 'title' => 'Exception!',
+                                 'message' => 'Exception!']);
+        }
+        // Commit transactions
+        DB::commit();
         // Redirect to the semester page
         return back()->with(['notify' => true,
                              'type' => 'success',
                              'title' => 'Success!',
                              'message' => 'Success!']);
+
+
     }
 }
