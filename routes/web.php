@@ -87,3 +87,10 @@ Route::get('/home', 'HomeController@Home');
 
 
   Route::get('/test/data/generate', 'Test\DataController@dataGenerate');
+// Inbox
+Route::get('/index', 'NotificationController@index');
+Route::get('/inbox', 'NotificationController@inbox');
+Route::get('/inbox/read', 'NotificationController@read');
+Route::get('/inbox/allread', 'NotificationController@allread');
+Route::get('/inbox/star', 'NotificationController@star');
+Route::get('/inbox/unstar', 'NotificationController@unstar');
