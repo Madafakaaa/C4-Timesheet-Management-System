@@ -20,8 +20,8 @@ class TutorController extends Controller
         }
         // 获取数据
         $db_users = DB::table('user')
-            ->where('user_is_available', 1)
-            ->get();
+                      ->where('user_is_available', 1)
+                      ->get();
         // 返回列表视图
         return view('/coordinator/tutor/tutor', ['db_users' => $db_users]);
     }

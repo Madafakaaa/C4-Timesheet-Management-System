@@ -96,7 +96,14 @@
                     </div>
                     @foreach($db_weekly_schedules as $weekly_schedule)
                       <div class="form-group">
-                        <label class="d-block">{{$weekly_schedule->week_name}}<span class="float-right">{{round($weekly_schedule->schedule_actual_duration_sum/$weekly_schedule->schedule_allocated_duration_sum*100,1)}}%</span></label>
+                        <label class="d-block">
+                          {{$weekly_schedule->week_name}}
+                          @if($weekly_schedule->schedule_allocated_duration_sum!=0)
+                            <span class="float-right">{{round($weekly_schedule->schedule_actual_duration_sum/$weekly_schedule->schedule_allocated_duration_sum*100,1)}}%</span>
+                          @else
+                            <span class="float-right">0 %</span>
+                          @endif
+                        </label>
                         <div class="progress progress-xs">
                           @if($weekly_schedule->schedule_actual_duration_sum==0)
                             <div class="progress-bar bg-default" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>

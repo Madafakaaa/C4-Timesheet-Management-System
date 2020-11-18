@@ -66,6 +66,10 @@ class LoginController extends Controller
         Session::put('user_first_name', $db_user->user_first_name);
         Session::put('user_last_name', $db_user->user_last_name);
         Session::put('user_email', $db_user->user_email);
+        Session::put('user_is_administrator', $db_user->user_is_administrator);
+        Session::put('user_is_deputy_hos', $db_user->user_is_deputy_hos);
+        Session::put('user_is_casual_academic', $db_user->user_is_casual_academic);
+        Session::put('user_is_uos_coordinator', $db_user->user_is_uos_coordinator);
 
         // Redirect to the home page
         return redirect('/home')->with(['notify' => true,

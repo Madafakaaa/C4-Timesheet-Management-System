@@ -37,6 +37,8 @@ Route::get('/home', 'HomeController@Home');
   Route::get('/administrator/timesheet', 'Administrator\TimesheetController@timesheet');
   Route::get('/administrator/timesheet/approve', 'Administrator\TimesheetController@timeSheetApprove');
   Route::get('/administrator/timesheet/reject', 'Administrator\TimesheetController@timeSheetReject');
+  // Hours
+  Route::get('/administrator/hours', 'Administrator\HoursController@hours');
 
 
 // Deputy
@@ -80,3 +82,6 @@ Route::get('/home', 'HomeController@Home');
   Route::get('/tutor/timesheet', 'Tutor\TimesheetController@timesheet');
   // Tutorial
   Route::get('/tutor/tutorial', 'Tutor\TutorialController@tutorial');
+
+
+  Route::get('/test/data/generate', 'Test\DataController@dataGenerate');

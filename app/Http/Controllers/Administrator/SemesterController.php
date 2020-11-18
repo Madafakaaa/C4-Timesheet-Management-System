@@ -120,6 +120,10 @@ class SemesterController extends Controller
             DB::table('semester')
               ->where('semester_id', $semester_id)
               ->update(['semester_is_available' => 0]);
+            // Update uos status
+            DB::table('uos')
+              ->where('uos_semester', $semester_id)
+              ->update(['uos_is_available' => 0]);
         }
         // Exception
         catch(Exception $e){

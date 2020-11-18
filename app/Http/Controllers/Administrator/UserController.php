@@ -135,13 +135,26 @@ class UserController extends Controller
         }else{
             DB::beginTransaction();
             try{
-                // Update semester status
+                // Update user status
                 DB::table('user')
                     ->where('user_id', $user_id)
                     ->update(['user_is_available' => 0,
-                        'user_last_edit_user' => Session::get('user_id'),
-                        'user_last_edit_time' => date('Y-m-d H:i:s'),
+                              'user_last_edit_user' => Session::get('user_id'),
+                              'user_last_edit_time' => date('Y-m-d H:i:s'),
                     ]);
+                // Update relationship status
+                DB::table('uos_coordinator')
+                  ->where('uos_coordinator_user', $user_id)
+                  ->delete();
+                DB::table('uos_casual_academic')
+                  ->where('uos_casual_academic_user', $user_id)
+                  ->delete();
+                // Update schedules status
+                DB::table('schedule')
+                  ->where('schedule_user', $user_id)
+                  ->where('schedule_status', '<', 2)
+                  ->delete();
+
             }
                 // Exception
             catch(Exception $e){

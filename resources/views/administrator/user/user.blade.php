@@ -25,7 +25,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">User Name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">User Id</th>
                     <th scope="col">Administrator</th>
                     <th scope="col">Casual Academic</th>
                     <th scope="col">Coordinator</th>
@@ -38,7 +38,7 @@
                     <tr>
                       <th>{{$loop->iteration}}</th>
                       <td>{{$db_user->user_first_name}} {{$db_user->user_last_name}}</td>
-                      <td>{{$db_user->user_email}}</td>
+                      <td>{{$db_user->user_id}}</td>
                       <td>
                         @if($db_user->user_is_administrator )
                           <span class="text-success">Yes</span>
@@ -79,7 +79,7 @@
                     </tr>
                   @empty
                     <tr>
-                      <th colspan="8" class="text-center">Empty</th>
+                      <th colspan="9" class="text-center">Empty</th>
                     </tr>
                   @endforelse
                 </tbody>

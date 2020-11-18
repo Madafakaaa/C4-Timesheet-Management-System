@@ -1,5 +1,0 @@
-路由
-routes/web.php
-
-控制器
-app/http/controller/

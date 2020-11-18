@@ -33,7 +33,7 @@ CREATE TABLE `user` (
 DROP TABLE IF EXISTS `semester`;
 CREATE TABLE `semester` (
   `semester_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated id for semester',
-  `semester_name` varchar(15) NOT NULL UNIQUE COMMENT 'name of the semester',
+  `semester_name` varchar(50) NOT NULL UNIQUE COMMENT 'name of the semester',
   `semester_start` date NOT NULL COMMENT 'the start date of the semester',
   `semester_end` date NOT NULL COMMENT 'the end date of the semester',
   `semester_duration` int(10) NOT NULL COMMENT 'the duration of the semester (weeks)',
@@ -174,7 +174,7 @@ CREATE TABLE `schedule` (
   `schedule_start_date` date NOT NULL COMMENT 'the start date of this schedule',
   `schedule_due_date` date NOT NULL COMMENT 'the due date of this schedule',
   `schedule_remark` varchar(50) NOT NULL COMMENT 'the tutors remark of the schedule',
-  `schedule_status` tinyint(4) unsigned NOT NULL COMMENT 'the status of the schedule (0:刚创建需要DEPUTY通过, 1:deputy通过，等tutor上传实际工作时间, 2:tutor上传实际时间等admin、coor审批，3:admin，coor通过)',
+  `schedule_status` tinyint(4) unsigned NOT NULL COMMENT 'the status of the schedule (0:new created by coordinator, waiting for deputy approval; 1:approved by deputy，waiting for tutors to submit the working hours; 2:the working hour the tutor submitted exceed the limit, waiting for the admin approval; 3:valid/approved by admin)',
   `schedule_create_user` char(8) NOT NULL COMMENT 'the user who create this schedule',
   `schedule_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'the time when this schedule is created',
   `schedule_last_edit_user` char(8) NOT NULL COMMENT 'the user who last edited this schedule',
