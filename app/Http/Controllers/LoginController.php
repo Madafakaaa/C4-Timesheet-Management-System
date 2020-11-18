@@ -60,16 +60,6 @@ class LoginController extends Controller
                                         'title' => 'Wrong user account or password!']);
         }
 
-
-        // get all notifications
-        $db_all_notifications = DB::table('notification')
-                                  ->join('user', 'notification.notification_create_user', '=', 'user.user_id')
-                                  ->where('notification_user', $db_user->user_id)
-                                  ->orderBy('notification_is_read', 'asc')
-                                  ->orderBy('notification_id', 'desc')
-                                  ->limit(5)
-                                  ->get();
-
         // Put data into session
         Session::put('login', true);
         Session::put('user_id', $db_user->user_id);
@@ -80,7 +70,6 @@ class LoginController extends Controller
         Session::put('user_is_deputy_hos', $db_user->user_is_deputy_hos);
         Session::put('user_is_casual_academic', $db_user->user_is_casual_academic);
         Session::put('user_is_uos_coordinator', $db_user->user_is_uos_coordinator);
-        Session::put('notifications', $db_all_notifications);
 
         // Redirect to the home page
         return redirect('/home')->with(['notify' => true,

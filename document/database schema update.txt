@@ -199,10 +199,12 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`notification_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` VALUES ('tiyu3403', '000000', 'Tianyang', 'Yu', 'Mr', '2020-10-05', 'tiyu3403@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'tiyu3403', '2020-10-21 17:30:41', 'tiyu3403', '2020-10-21 17:30:41');
-INSERT INTO `user` VALUES ('yshi9422', '000000', 'Yuhao', 'Shi', 'Mr', '2020-10-06', 'yshi9422@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'yshi9422', '2020-10-21 17:29:24', 'yshi9422', '2020-10-21 17:29:24');
+
 INSERT INTO `user` VALUES ('ziyi3049', '000000', 'Ziyue', 'Yi', 'Mr', '2020-10-06', 'ziyi3049@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'ziyi3049', '2020-10-21 17:28:14', 'ziyi3049', '2020-10-21 17:28:14');
-INSERT INTO `user` VALUES ('zzha4377', '000000', 'Ziyi', 'Zhang', 'Mr', '2020-10-06', 'zzha4377@uni.sydney.edu.au', '1', '1', '1', '1', '1', 'zzha4377', '2020-10-21 17:24:44', 'zzha4377', '2020-10-21 17:24:44');
+
+INSERT INTO `user` VALUES ('tiyu3403', '000000', 'Tianyang', 'Yu', 'Mr', '2020-10-05', 'tiyu3403@uni.sydney.edu.au', '0', '1', '1', '1', '1', 'tiyu3403', '2020-10-21 17:30:41', 'tiyu3403', '2020-10-21 17:30:41');
+INSERT INTO `user` VALUES ('yshi9422', '000000', 'Yuhao', 'Shi', 'Mr', '2020-10-06', 'yshi9422@uni.sydney.edu.au', '0', '1', '1', '1', '1', 'yshi9422', '2020-10-21 17:29:24', 'yshi9422', '2020-10-21 17:29:24');
+INSERT INTO `user` VALUES ('zzha4377', '000000', 'Ziyi', 'Zhang', 'Mr', '2020-10-06', 'zzha4377@uni.sydney.edu.au', '0', '1', '1', '1', '1', 'zzha4377', '2020-10-21 17:24:44', 'zzha4377', '2020-10-21 17:24:44');
 
 
 

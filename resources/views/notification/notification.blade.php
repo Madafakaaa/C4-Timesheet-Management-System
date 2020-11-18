@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('top_nav_page_name')
-  <h1 class="page-title">Claimed Hours</h1>
+  <h1 class="page-title">Notification</h1>
 @endsection
 
 @section('body')
